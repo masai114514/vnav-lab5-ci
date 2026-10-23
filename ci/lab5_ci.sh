@@ -204,7 +204,12 @@ s_build_deps() {
   # 只看 install/setup.bash 是否存在是不够的：Run #2 里 glog_catkin 编译失败
   # （bionic 缺 autoreconf），setup.bash 照样生成，于是 deps 被误判为成功，
   # 一路拖到 s_build_main 才炸在 `Could not find glog_catkin`。
-  dep_ok() { find "$WS_DEPS/install" -name "$1Config.cmake" -print -quit 2>/dev/null | grep -q .; }
+  # 不用 `find | grep -q`：grep 提前退出会给 find 送 SIGPIPE，pipefail 下变成 141
+  dep_ok() {
+    local f
+    f="$(find "$WS_DEPS/install" -name "$1Config.cmake" -print -quit 2>/dev/null)"
+    [ -n "$f" ]
+  }
 
   local missing=() d
   for d in opencv3_catkin glog_catkin gflags_catkin catkin_simple; do
@@ -284,6 +289,7 @@ CMK
   else
     warn "找不到 xfeatures2d 头文件 —— SURF 行会缺"
   fi
+  return 0
 }
 
 # =============================================================================
