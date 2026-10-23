@@ -1,9 +1,0 @@
-vCPU     = 4
-内存     = 15988 MB
-PRETTY_NAME="Ubuntu 18.04.6 LTS"
-VERSION_CODENAME=bionic
-ROOT     = /home/runner/work/vnav-lab5-ci/vnav-lab5-ci
-catkin   = (没有 catkin_tools)
-cmake    = cmake version 3.10.2
-gcc      = 7
---- 已装的 ROS 包数: 81

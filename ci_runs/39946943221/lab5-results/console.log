@@ -1,499 +1,0 @@
-vCPU     = 4
-内存     = 15988 MB
-PRETTY_NAME="Ubuntu 18.04.6 LTS"
-VERSION_CODENAME=bionic
-ROOT     = /home/runner/work/vnav-lab5-ci/vnav-lab5-ci
-catkin   = (没有 catkin_tools)
-cmake    = cmake version 3.10.2
-gcc      = 7
---- 已装的 ROS 包数: 81
-[1;36m[ci][0m 发行版代号 = bionic
-[1;36m[ci][0m apt update OK
-Setting up x11proto-fixes-dev (1:2018.4-4) ...
-Setting up libxau-dev:amd64 (1:1.0.8-1ubuntu1) ...
-Setting up libxcb1-dev:amd64 (1.13-2~ubuntu18.04) ...
-Setting up libx11-dev:amd64 (2:1.6.4-3ubuntu0.4) ...
-Setting up libxfixes-dev:amd64 (1:5.0.3-1) ...
-Setting up libxcb-shm0-dev:amd64 (1.13-2~ubuntu18.04) ...
-Setting up libxdamage-dev:amd64 (1:1.1.4-3) ...
-Setting up libxrender-dev:amd64 (1:0.9.10-1) ...
-Setting up libxcb-render0-dev:amd64 (1.13-2~ubuntu18.04) ...
-Setting up libxft-dev (2.3.2-1) ...
-Setting up libgdk-pixbuf2.0-dev (2.36.11-2) ...
-Setting up libxext-dev:amd64 (2:1.3.3-1) ...
-Setting up libxinerama-dev:amd64 (2:1.1.3-1) ...
-Setting up libxi-dev:amd64 (2:1.7.9-1) ...
-Setting up libxcursor-dev:amd64 (1:1.1.15-1) ...
-Setting up libxrandr-dev:amd64 (2:1.5.1-1) ...
-Setting up libcairo2-dev:amd64 (1.15.10-2ubuntu0.1) ...
-Setting up libxcomposite-dev:amd64 (1:0.4.4-2) ...
-Setting up libpango1.0-dev (1.40.14-1ubuntu0.1) ...
-Setting up libgtk2.0-dev (2.24.32-1ubuntu1) ...
-[1;36m[ci][0m ---------- 关键依赖版本 ----------
-Python 2.7.17
-catkin_tools 0.6.1 (C) 2014-2026 Open Source Robotics Foundation
-catkin_tools is released under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
-cv_bridge 头文件: 有
-[1;36m[ci][0m deps 缓存命中（/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install 已就绪），跳过 OpenCV 编译
-109M	/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
-  已缓存 libopencv*.so : 75 个
-Cloning into '/tmp/vision_opencv'...
-NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
---------------------------------------------------------------------------------
-Profile:                     default
-Extending:        [explicit] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
-Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main
---------------------------------------------------------------------------------
-Build Space:       [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/build
-Devel Space:       [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel
-Install Space:      [unused] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/install
-Log Space:         [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/logs
-Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src
-DESTDIR:            [unused] None
---------------------------------------------------------------------------------
-Devel Space Layout:          linked
-Install Space Layout:        None
---------------------------------------------------------------------------------
-Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
-Additional Make Args:        None
-Additional catkin Make Args: None
-Internal Make Job Server:    True
-Cache Job Environments:      False
---------------------------------------------------------------------------------
-Whitelisted Packages:        None
-Blacklisted Packages:        None
---------------------------------------------------------------------------------
-Workspace configuration appears valid.
-
-Initialized new catkin workspace in `/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main`
---------------------------------------------------------------------------------
-NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
---------------------------------------------------------------------------------
-Profile:                     default
-Extending:        [explicit] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
-Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main
---------------------------------------------------------------------------------
-Build Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/build
-Devel Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel
-Install Space:      [unused] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/install
-Log Space:         [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/logs
-Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src
-DESTDIR:            [unused] None
---------------------------------------------------------------------------------
-Devel Space Layout:          linked
-Install Space Layout:        None
---------------------------------------------------------------------------------
-Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
-Additional Make Args:        -j4
-Additional catkin Make Args: None
-Internal Make Job Server:    True
-Cache Job Environments:      False
---------------------------------------------------------------------------------
-Whitelisted Packages:        None
-Blacklisted Packages:        None
---------------------------------------------------------------------------------
-Workspace configuration appears valid.
-
-NOTE: Forcing CMake to run for each package.
---------------------------------------------------------------------------------
-[build] Found '3' packages in 0.0 seconds.                                     
-[build] Updating package table.                                                
-Starting >>> catkin_tools_prebuild               
-Finished <<< catkin_tools_prebuild                [ 2.0 seconds ]
-Starting >>> cv_bridge                           
-Finished <<< cv_bridge                            [ 9.7 seconds ]
-[build] Summary: All 2 packages succeeded!
-[build] Ignored: 2 packages were skipped or are blacklisted.
-[build] Warnings: None.
-[build] Abandoned: No packages were abandoned.
-[build] Failed: No packages failed.
-[build] Runtime: 11.7 seconds total.
-[build] Note: Workspace packages have changed, please re-source setup files to use them.
-NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
---------------------------------------------------------------------------------
-Profile:                     default
-Extending:        [explicit] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
-Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main
---------------------------------------------------------------------------------
-Build Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/build
-Devel Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel
-Install Space:      [unused] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/install
-Log Space:          [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/logs
-Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src
-DESTDIR:            [unused] None
---------------------------------------------------------------------------------
-Devel Space Layout:          linked
-Install Space Layout:        None
---------------------------------------------------------------------------------
-Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
-Additional Make Args:        -j4
-Additional catkin Make Args: None
-Internal Make Job Server:    True
-Cache Job Environments:      False
---------------------------------------------------------------------------------
-Whitelisted Packages:        None
-Blacklisted Packages:        None
---------------------------------------------------------------------------------
-Workspace configuration appears valid.
---------------------------------------------------------------------------------
-[build] Found '3' packages in 0.0 seconds.                                     
-[build] Updating package table.                                                
-Starting >>> ci_tools                
-Starting >>> cv_bridge               
-Finished <<< cv_bridge                [ 0.4 seconds ]
-Starting >>> lab_5                   
-Finished <<< ci_tools                 [ 7.9 seconds ]
-Finished <<< lab_5                    [ 9.4 seconds ]
-
-[build] Successful packages:
-
- [Successful] ci_tools 
- [Successful] cv_bridge
- [Successful] lab_5    
-
-[build] Summary: All 3 packages succeeded!
-[build] Ignored: None.
-[build] Warnings: None.
-[build] Abandoned: No packages were abandoned.
-[build] Failed: No packages failed.
-[build] Runtime: 9.9 seconds total.
-[build] Note: Workspace packages have changed, please re-source setup files to use them.
-[1;36m[ci][0m ---------- 编出来的可执行文件 ----------
-total 16
-drwxr-xr-x 2 root root 4096 Oct 23 11:35 .
-drwxr-xr-x 7 root root 4096 Oct 23 11:35 ..
-lrwxrwxrwx 1 root root   92 Oct 23 11:35 self_flow -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/self_flow
-lrwxrwxrwx 1 root root   97 Oct 23 11:35 track_features -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/track_features
-total 12
-drwxr-xr-x 2 root root 4096 Oct 23 11:35 .
-drwxr-xr-x 7 root root 4096 Oct 23 11:35 ..
-lrwxrwxrwx 1 root root   99 Oct 23 11:35 mp4_to_bag -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/ci_tools/lib/ci_tools/mp4_to_bag
-# catkin build 证据
-
-## 编译环境
-- ROS: melodic
-- gcc: 7
-- OpenCV: #define CV_VERSION_MAJOR    3
-
-## lab_5 产物
-total 16
-drwxr-xr-x 2 root root 4096 Oct 23 11:35 .
-drwxr-xr-x 7 root root 4096 Oct 23 11:35 ..
-lrwxrwxrwx 1 root root   92 Oct 23 11:35 self_flow -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/self_flow
-lrwxrwxrwx 1 root root   97 Oct 23 11:35 track_features -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/track_features
-
-## OpenCV 版本（运行时实际链接到的那一份）
-	libopencv_core.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_core.so.3.4 (0x00007f02a0e00000)
-	libopencv_highgui.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_highgui.so.3.4 (0x00007f02a0a00000)
-	libopencv_imgcodecs.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgcodecs.so.3.4 (0x00007f02a0200000)
-	libopencv_calib3d.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_calib3d.so.3.4 (0x00007f029e400000)
-	libopencv_features2d.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_features2d.so.3.4 (0x00007f029e000000)
-	libopencv_flann.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_flann.so.3.4 (0x00007f029dc00000)
-	libopencv_imgproc.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgproc.so.3.4 (0x00007f029b200000)
-	libopencv_video.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_video.so.3.4 (0x00007f029ac00000)
-
-## cv_bridge 链接到的 OpenCV
-	libopencv_imgcodecs.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgcodecs.so.3.4 (0x00007f69d2c00000)
-	libopencv_imgproc.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgproc.so.3.4 (0x00007f69d0000000)
-	libopencv_core.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_core.so.3.4 (0x00007f69cf000000)
-[1;36m[ci][0m roscore 就绪（pid=4866）
-
-------------------------------------------------------------------------
-## 图像对：descriptor:=SIFT
-
-------------------------------------------------------------------------
-[0m[ INFO] [1792755325.773062507]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
-[0m[ INFO] [1792755325.773954865]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
-[0m[ INFO] [1792755325.838453776]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_keypoints_img1.png[0m
-[0m[ INFO] [1792755325.847821589]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_keypoints_img2.png[0m
-[0m[ INFO] [1792755325.931278181]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_matches_all_knn.png[0m
-[0m[ INFO] [1792755325.945395303]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_matches_good_lowe.png[0m
-[0m[ INFO] [1792755325.963952806]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_matches_inliers_outliers.png[0m
-Avg. Keypoints 1 Size: 603
-Avg. Keypoints 2 Size: 969
-Avg. Number of matches: 603
-Avg. Number of good matches: 98
-Avg. Number of Inliers: 76
-Avg. Inliers ratio: 0.77551
-Num. of samples: 1
--------- 统计表（官方格式）--------
-Avg. Keypoints 1 Size: 603
-Avg. Keypoints 2 Size: 969
-Avg. Number of matches: 603
-Avg. Number of good matches: 98
-Avg. Number of Inliers: 76
-Avg. Inliers ratio: 0.77551
-Num. of samples: 1
-
-------------------------------------------------------------------------
-## 图像对：descriptor:=SURF
-
-------------------------------------------------------------------------
-[0m[ INFO] [1792755326.246751005]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
-[0m[ INFO] [1792755326.247669543]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
-[0m[ INFO] [1792755326.310846703]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_keypoints_img1.png[0m
-[0m[ INFO] [1792755326.320149945]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_keypoints_img2.png[0m
-[0m[ INFO] [1792755326.455502357]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_matches_all_knn.png[0m
-[0m[ INFO] [1792755326.470539438]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_matches_good_lowe.png[0m
-[0m[ INFO] [1792755326.492029995]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_matches_inliers_outliers.png[0m
-Avg. Keypoints 1 Size: 997
-Avg. Keypoints 2 Size: 1822
-Avg. Number of matches: 997
-Avg. Number of good matches: 138
-Avg. Number of Inliers: 91
-Avg. Inliers ratio: 0.65942
-Num. of samples: 1
--------- 统计表（官方格式）--------
-Avg. Keypoints 1 Size: 997
-Avg. Keypoints 2 Size: 1822
-Avg. Number of matches: 997
-Avg. Number of good matches: 138
-Avg. Number of Inliers: 91
-Avg. Inliers ratio: 0.65942
-Num. of samples: 1
-
-------------------------------------------------------------------------
-## 图像对：descriptor:=ORB
-
-------------------------------------------------------------------------
-[0m[ INFO] [1792755326.852236654]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
-[0m[ INFO] [1792755326.853110057]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
-[0m[ INFO] [1792755326.872676527]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_keypoints_img1.png[0m
-[0m[ INFO] [1792755326.881988506]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_keypoints_img2.png[0m
-[0m[ INFO] [1792755326.922788411]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_all_knn.png[0m
-[0m[ INFO] [1792755326.936436394]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_good_lowe.png[0m
-[0m[ INFO] [1792755326.955223226]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_inliers_outliers.png[0m
-Avg. Keypoints 1 Size: 500
-Avg. Keypoints 2 Size: 500
-Avg. Number of matches: 500
-Avg. Number of good matches: 13
-Avg. Number of Inliers: 7
-Avg. Inliers ratio: 0.538462
-Num. of samples: 1
--------- 统计表（官方格式）--------
-Avg. Keypoints 1 Size: 500
-Avg. Keypoints 2 Size: 500
-Avg. Number of matches: 500
-Avg. Number of good matches: 13
-Avg. Number of Inliers: 7
-Avg. Inliers ratio: 0.538462
-Num. of samples: 1
-
-------------------------------------------------------------------------
-## 图像对：descriptor:=FAST
-
-------------------------------------------------------------------------
-[0m[ INFO] [1792755327.248726062]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
-[0m[ INFO] [1792755327.249619272]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
-[0m[ INFO] [1792755327.271295445]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_keypoints_img1.png[0m
-[0m[ INFO] [1792755327.280405567]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_keypoints_img2.png[0m
-[0m[ INFO] [1792755327.729905488]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_matches_all_knn.png[0m
-[0m[ INFO] [1792755327.744015717]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_matches_good_lowe.png[0m
-[0m[ INFO] [1792755327.775838259]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_matches_inliers_outliers.png[0m
-Avg. Keypoints 1 Size: 2266
-Avg. Keypoints 2 Size: 3653
-Avg. Number of matches: 2266
-Avg. Number of good matches: 41
-Avg. Number of Inliers: 17
-Avg. Inliers ratio: 0.414634
-Num. of samples: 1
--------- 统计表（官方格式）--------
-Avg. Keypoints 1 Size: 2266
-Avg. Keypoints 2 Size: 3653
-Avg. Number of matches: 2266
-Avg. Number of good matches: 41
-Avg. Number of Inliers: 17
-Avg. Inliers ratio: 0.414634
-Num. of samples: 1
-total 9156
-drwxr-xr-x 2 root root   4096 Oct 23 11:35 .
-drwxr-xr-x 3 root root   4096 Oct 23 11:35 ..
--rw-r--r-- 1 root root 178225 Oct 23 11:35 fast_brief_keypoints_img1.png
--rw-r--r-- 1 root root 431511 Oct 23 11:35 fast_brief_keypoints_img2.png
--rw-r--r-- 1 root root 585856 Oct 23 11:35 fast_brief_matches_all_knn.png
--rw-r--r-- 1 root root 540520 Oct 23 11:35 fast_brief_matches_good_lowe.png
--rw-r--r-- 1 root root 573381 Oct 23 11:35 fast_brief_matches_inliers_outliers.png
--rw-r--r-- 1 root root 168359 Oct 23 11:35 orb_keypoints_img1.png
--rw-r--r-- 1 root root 406114 Oct 23 11:35 orb_keypoints_img2.png
--rw-r--r-- 1 root root 574660 Oct 23 11:35 orb_matches_all_knn.png
--rw-r--r-- 1 root root 532126 Oct 23 11:35 orb_matches_good_lowe.png
--rw-r--r-- 1 root root 544585 Oct 23 11:35 orb_matches_inliers_outliers.png
--rw-r--r-- 1 root root 162330 Oct 23 11:35 sift_keypoints_img1.png
--rw-r--r-- 1 root root 391952 Oct 23 11:35 sift_keypoints_img2.png
--rw-r--r-- 1 root root 625573 Oct 23 11:35 sift_matches_all_knn.png
--rw-r--r-- 1 root root 553980 Oct 23 11:35 sift_matches_good_lowe.png
--rw-r--r-- 1 root root 581513 Oct 23 11:35 sift_matches_inliers_outliers.png
--rw-r--r-- 1 root root 190603 Oct 23 11:35 surf_keypoints_img1.png
--rw-r--r-- 1 root root 495034 Oct 23 11:35 surf_keypoints_img2.png
--rw-r--r-- 1 root root 615138 Oct 23 11:35 surf_matches_all_knn.png
--rw-r--r-- 1 root root 560290 Oct 23 11:35 surf_matches_good_lowe.png
--rw-r--r-- 1 root root 620254 Oct 23 11:35 surf_matches_inliers_outliers.png
-
-------------------------------------------------------------------------
-## mp4 -> rosbag
-
-------------------------------------------------------------------------
-[mp4_to_bag] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/data/seq20s.mp4 -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
-             120 帧 320x200 @ 6.00 fps, 时长 20.00 s
-             topic=/tesse/left_cam/rgb/image_raw  (另写 /clock)
-path:        /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
-version:     2.0
-duration:    19.8s
-start:       Jan 01 1970 00:00:01.00 (1.00)
-end:         Jan 01 1970 00:00:20.83 (20.83)
-size:        22.0 MB
-messages:    240
-compression: none [25/25 chunks]
-types:       rosgraph_msgs/Clock [a9c97c1d230cfc112e270351a944ee47]
-             sensor_msgs/Image   [060021388200f6f0f447d0fcd9c64743]
-topics:      /clock                          120 msgs    : rosgraph_msgs/Clock
-             /tesse/left_cam/rgb/image_raw   120 msgs    : sensor_msgs/Image
-[1;36m[ci][0m bag 里图像帧数 = 120
-[1;36m[ci][0m roscore 就绪（pid=5130）
-
-------------------------------------------------------------------------
-## 视频序列：descriptor:=LK（max_frames=120）
-
-------------------------------------------------------------------------
-[1;33m[ci][0m 节点 300s 没退出，SIGINT
--------- 视频累计统计 --------
-Avg. Keypoints 1 Size: 71.6316
-Avg. Keypoints 2 Size: 64.1053
-Avg. Number of matches: 64.1053
-Avg. Number of good matches: 64.1053
-Avg. Number of Inliers: 44.1491
-Avg. Inliers ratio: 0.714499
-Num. of samples: 114
-
-------------------------------------------------------------------------
-## 视频序列：descriptor:=SIFT（max_frames=120）
-
-------------------------------------------------------------------------
-ci/lab5_ci.sh: line 535:  5524 Segmentation fault      (core dumped) rosrun lab_5 track_features _mode:=1 _descriptor:="$desc" _output_dir:="$figdir" _interactive:=false _lk_save_every:=10 _max_frames:="$nframes" /images_topic:=/camera/color/image_raw > "$OUT/video_${desc}.log" 2>&1
--------- 视频累计统计 --------
-[1;33m[ci][0m SIFT 视频模式没有打出统计
-[0m[ INFO] [1792755644.884372168]: Opening /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag[0m
-
-Waiting 0.2 seconds after advertising topics... done.
-
-Hit space to toggle paused, or 's' to step.
- [RUNNING]  Bag Time:      1.000000   Duration: 0.000000 / 19.833333                [RUNNING]  Bag Time:      1.161603   Duration: 0.161603 / 19.833333                [RUNNING]  Bag Time:      1.322821   Duration: 0.322821 / 19.833333                [RUNNING]  Bag Time:      1.485206   Duration: 0.485206 / 19.833333                [RUNNING]  Bag Time:      1.646291   Duration: 0.646291 / 19.833333                [RUNNING]  Bag Time:      1.807566   Duration: 0.807566 / 19.833333                [RUNNING]  Bag Time:      1.968862   Duration: 0.968862 / 19.833333                [RUNNING]  Bag Time:      2.130151   Duration: 1.130151 / 19.833333                [RUNNING]  Bag Time:      2.331610   Duration: 1.331610 / 19.833333                [RUNNING]  Bag Time:      2.492766   Duration: 1.492766 / 19.833333                [RUNNING]  Bag Time:      2.653898   Duration: 1.653898 / 19.833333                [RUNNING]  Bag Time:      2.815010   Duration: 1.815010 / 19.833333                [RUNNING]  Bag Time:      2.976148   Duration: 1.976148 / 19.833333                [RUNNING]  Bag Time:      3.137255   Duration: 2.137255 / 19.833333                [RUNNING]  Bag Time:      3.298383   Duration: 2.298383 / 19.833333                [RUNNING]  Bag Time:      3.499785   Duration: 2.499785 / 19.833333                [RUNNING]  Bag Time:      3.660868   Duration: 2.660868 / 19.833333                [RUNNING]  Bag Time:      3.822004   Duration: 2.822004 / 19.833333                [RUNNING]  Bag Time:      3.983239   Duration: 2.983239 / 19.833333                [RUNNING]  Bag Time:      4.144419   Duration: 3.144419 / 19.833333                [RUNNING]  Bag Time:      4.305568   Duration: 3.305568 / 19.833333                [RUNNING]  Bag Time:      4.466716   Duration: 3.466716 / 19.833333                [RUNNING]  Bag Time:      4.627983   Duration: 3.627983 / 19.833333                [RUNNING]  Bag Time:      4.830111   Duration: 3.830111 / 19.833333                [RUNNING]  Bag Time:      4.991663   Duration: 3.991663 / 19.833333                [RUNNING]  Bag Time:      5.153374   Duration: 4.153374 / 19.833333                [RUNNING]  Bag Time:      5.314847   Duration: 4.314847 / 19.833333                [RUNNING]  Bag Time:      5.476532   Duration: 4.476532 / 19.833333                [RUNNING]  Bag Time:      5.637998   Duration: 4.637998 / 19.833333                [RUNNING]  Bag Time:      5.799574   Duration: 4.799574 / 19.833333                [RUNNING]  Bag Time:      5.961270   Duration: 4.961270 / 19.833333                [RUNNING]  Bag Time:      6.163293   Duration: 5.163293 / 19.833333                [RUNNING]  Bag Time:      6.324987   Duration: 5.324987 / 19.833333                [RUNNING]  Bag Time:      6.486647   Duration: 5.486647 / 19.833333                [RUNNING]  Bag Time:      6.648358   Duration: 5.648358 / 19.833333                [RUNNING]  Bag Time:      6.809921   Duration: 5.809921 / 19.833333                [RUNNING]  Bag Time:      6.971058   Duration: 5.971058 / 19.833333                [RUNNING]  Bag Time:      7.132438   Duration: 6.132438 / 19.833333                [RUNNING]  Bag Time:      7.293856   Duration: 6.293856 / 19.833333                [RUNNING]  Bag Time:      7.495609   Duration: 6.495609 / 19.833333                [RUNNING]  Bag Time:      7.657322   Duration: 6.657322 / 19.833333                [RUNNING]  Bag Time:      7.819002   Duration: 6.819002 / 19.833333                [RUNNING]  Bag Time:      7.980593   Duration: 6.980593 / 19.833333                [RUNNING]  Bag Time:      8.142238   Duration: 7.142238 / 19.833333                [RUNNING]  Bag Time:      8.303901   Duration: 7.303901 / 19.833333                [RUNNING]  Bag Time:      8.465577   Duration: 7.465577 / 19.833333                [RUNNING]  Bag Time:      8.627230   Duration: 7.627230 / 19.833333                [RUNNING]  Bag Time:      8.828875   Duration: 7.828875 / 19.833333                [RUNNING]  Bag Time:      8.990554   Duration: 7.990554 / 19.833333                [RUNNING]  Bag Time:      9.152221   Duration: 8.152221 / 19.833333                [RUNNING]  Bag Time:      9.313562   Duration: 8.313562 / 19.833333                [RUNNING]  Bag Time:      9.475019   Duration: 8.475019 / 19.833333                [RUNNING]  Bag Time:      9.636219   Duration: 8.636219 / 19.833333                [RUNNING]  Bag Time:      9.797569   Duration: 8.797569 / 19.833333                [RUNNING]  Bag Time:      9.999176   Duration: 8.999176 / 19.833333                [RUNNING]  Bag Time:     10.160597   Duration: 9.160597 / 19.833333                [RUNNING]  Bag Time:     10.322222   Duration: 9.322222 / 19.833333                [RUNNING]  Bag Time:     10.483911   Duration: 9.483911 / 19.833333                [RUNNING]  Bag Time:     10.645564   Duration: 9.645564 / 19.833333                [RUNNING]  Bag Time:     10.807271   Duration: 9.807271 / 19.833333                [RUNNING]  Bag Time:     10.968938   Duration: 9.968938 / 19.833333                [RUNNING]  Bag Time:     11.130555   Duration: 10.130555 / 19.833333                [RUNNING]  Bag Time:     11.332535   Duration: 10.332535 / 19.833333                [RUNNING]  Bag Time:     11.494240   Duration: 10.494240 / 19.833333                [RUNNING]  Bag Time:     11.655743   Duration: 10.655743 / 19.833333                [RUNNING]  Bag Time:     11.817411   Duration: 10.817411 / 19.833333                [RUNNING]  Bag Time:     11.979125   Duration: 10.979125 / 19.833333                [RUNNING]  Bag Time:     12.140694   Duration: 11.140694 / 19.833333                [RUNNING]  Bag Time:     12.302295   Duration: 11.302295 / 19.833333                [RUNNING]  Bag Time:     12.463881   Duration: 11.463881 / 19.833333                [RUNNING]  Bag Time:     12.666004   Duration: 11.666004 / 19.833333                [RUNNING]  Bag Time:     12.827727   Duration: 11.827727 / 19.833333                [RUNNING]  Bag Time:     12.989379   Duration: 11.989379 / 19.833333                [RUNNING]  Bag Time:     13.151120   Duration: 12.151120 / 19.833333                [RUNNING]  Bag Time:     13.312791   Duration: 12.312791 / 19.833333                [RUNNING]  Bag Time:     13.474447   Duration: 12.474447 / 19.833333                [RUNNING]  Bag Time:     13.635537   Duration: 12.635537 / 19.833333                [RUNNING]  Bag Time:     13.796663   Duration: 12.796663 / 19.833333                [RUNNING]  Bag Time:     13.998477   Duration: 12.998477 / 19.833333                [RUNNING]  Bag Time:     14.160201   Duration: 13.160201 / 19.833333                [RUNNING]  Bag Time:     14.321920   Duration: 13.321920 / 19.833333                [RUNNING]  Bag Time:     14.483583   Duration: 13.483583 / 19.833333                [RUNNING]  Bag Time:     14.645260   Duration: 13.645260 / 19.833333                [RUNNING]  Bag Time:     14.806934   Duration: 13.806934 / 19.833333                [RUNNING]  Bag Time:     14.968628   Duration: 13.968628 / 19.833333                [RUNNING]  Bag Time:     15.130283   Duration: 14.130283 / 19.833333                [RUNNING]  Bag Time:     15.332286   Duration: 14.332286 / 19.833333                [RUNNING]  Bag Time:     15.494005   Duration: 14.494005 / 19.833333                [RUNNING]  Bag Time:     15.655558   Duration: 14.655558 / 19.833333                [RUNNING]  Bag Time:     15.816974   Duration: 14.816974 / 19.833333                [RUNNING]  Bag Time:     15.978664   Duration: 14.978664 / 19.833333                [RUNNING]  Bag Time:     16.140260   Duration: 15.140260 / 19.833333                [RUNNING]  Bag Time:     16.301630   Duration: 15.301630 / 19.833333                [RUNNING]  Bag Time:     16.462766   Duration: 15.462766 / 19.833333                [RUNNING]  Bag Time:     16.664329   Duration: 15.664329 / 19.833333                [RUNNING]  Bag Time:     16.825685   Duration: 15.825685 / 19.833333                [RUNNING]  Bag Time:     16.987239   Duration: 15.987239 / 19.833333                [RUNNING]  Bag Time:     17.148971   Duration: 16.148971 / 19.833333                [RUNNING]  Bag Time:     17.310434   Duration: 16.310434 / 19.833333                [RUNNING]  Bag Time:     17.472172   Duration: 16.472172 / 19.833333                [RUNNING]  Bag Time:     17.633437   Duration: 16.633437 / 19.833333                [RUNNING]  Bag Time:     17.794826   Duration: 16.794826 / 19.833333                [RUNNING]  Bag Time:     17.996954   Duration: 16.996954 / 19.833333                [RUNNING]  Bag Time:     18.158633   Duration: 17.158633 / 19.833333                [RUNNING]  Bag Time:     18.320237   Duration: 17.320237 / 19.833333                [RUNNING]  Bag Time:     18.481868   Duration: 17.481868 / 19.833333                [RUNNING]  Bag Time:     18.643312   Duration: 17.643312 / 19.833333                [RUNNING]  Bag Time:     18.804984   Duration: 17.804984 / 19.833333                [RUNNING]  Bag Time:     18.966699   Duration: 17.966699 / 19.833333                [RUNNING]  Bag Time:     19.128407   Duration: 18.128407 / 19.833333                [RUNNING]  Bag Time:     19.330558   Duration: 18.330558 / 19.833333                [RUNNING]  Bag Time:     19.492187   Duration: 18.492187 / 19.833333                [RUNNING]  Bag Time:     19.653751   Duration: 18.653751 / 19.833333                [RUNNING]  Bag Time:     19.815297   Duration: 18.815297 / 19.833333                [RUNNING]  Bag Time:     19.976967   Duration: 18.976967 / 19.833333                [RUNNING]  Bag Time:     20.138651   Duration: 19.138651 / 19.833333                [RUNNING]  Bag Time:     20.300292   Duration: 19.300292 / 19.833333                [RUNNING]  Bag Time:     20.461905   Duration: 19.461905 / 19.833333                [RUNNING]  Bag Time:     20.663899   Duration: 19.663899 / 19.833333               
-Done.
-
-------------------------------------------------------------------------
-## 视频序列：descriptor:=ORB（max_frames=120）
-
-------------------------------------------------------------------------
-ci/lab5_ci.sh: line 535:  5572 Segmentation fault      (core dumped) rosrun lab_5 track_features _mode:=1 _descriptor:="$desc" _output_dir:="$figdir" _interactive:=false _lk_save_every:=10 _max_frames:="$nframes" /images_topic:=/camera/color/image_raw > "$OUT/video_${desc}.log" 2>&1
--------- 视频累计统计 --------
-[1;33m[ci][0m ORB 视频模式没有打出统计
-[0m[ INFO] [1792755653.617537019]: Opening /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag[0m
-
-Waiting 0.2 seconds after advertising topics... done.
-
-Hit space to toggle paused, or 's' to step.
- [RUNNING]  Bag Time:      1.000000   Duration: 0.000000 / 19.833333                [RUNNING]  Bag Time:      1.161569   Duration: 0.161569 / 19.833333                [RUNNING]  Bag Time:      1.322729   Duration: 0.322729 / 19.833333                [RUNNING]  Bag Time:      1.484026   Duration: 0.484026 / 19.833333                [RUNNING]  Bag Time:      1.645117   Duration: 0.645117 / 19.833333                [RUNNING]  Bag Time:      1.806308   Duration: 0.806308 / 19.833333                [RUNNING]  Bag Time:      1.967480   Duration: 0.967480 / 19.833333                [RUNNING]  Bag Time:      2.128613   Duration: 1.128613 / 19.833333                [RUNNING]  Bag Time:      2.329975   Duration: 1.329975 / 19.833333                [RUNNING]  Bag Time:      2.491144   Duration: 1.491144 / 19.833333                [RUNNING]  Bag Time:      2.652224   Duration: 1.652224 / 19.833333                [RUNNING]  Bag Time:      2.813323   Duration: 1.813323 / 19.833333                [RUNNING]  Bag Time:      2.974452   Duration: 1.974452 / 19.833333                [RUNNING]  Bag Time:      3.135684   Duration: 2.135684 / 19.833333                [RUNNING]  Bag Time:      3.297028   Duration: 2.297028 / 19.833333                [RUNNING]  Bag Time:      3.498737   Duration: 2.498737 / 19.833333                [RUNNING]  Bag Time:      3.660393   Duration: 2.660393 / 19.833333                [RUNNING]  Bag Time:      3.821993   Duration: 2.821993 / 19.833333                [RUNNING]  Bag Time:      3.983181   Duration: 2.983181 / 19.833333                [RUNNING]  Bag Time:      4.144415   Duration: 3.144415 / 19.833333                [RUNNING]  Bag Time:      4.305950   Duration: 3.305950 / 19.833333                [RUNNING]  Bag Time:      4.467586   Duration: 3.467586 / 19.833333                [RUNNING]  Bag Time:      4.629130   Duration: 3.629130 / 19.833333                [RUNNING]  Bag Time:      4.831259   Duration: 3.831259 / 19.833333                [RUNNING]  Bag Time:      4.992917   Duration: 3.992917 / 19.833333                [RUNNING]  Bag Time:      5.154527   Duration: 4.154527 / 19.833333                [RUNNING]  Bag Time:      5.315922   Duration: 4.315922 / 19.833333                [RUNNING]  Bag Time:      5.477373   Duration: 4.477373 / 19.833333                [RUNNING]  Bag Time:      5.639047   Duration: 4.639047 / 19.833333                [RUNNING]  Bag Time:      5.800762   Duration: 4.800762 / 19.833333                [RUNNING]  Bag Time:      5.962389   Duration: 4.962389 / 19.833333                [RUNNING]  Bag Time:      6.164349   Duration: 5.164349 / 19.833333                [RUNNING]  Bag Time:      6.325969   Duration: 5.325969 / 19.833333                [RUNNING]  Bag Time:      6.487378   Duration: 5.487378 / 19.833333                [RUNNING]  Bag Time:      6.648894   Duration: 5.648894 / 19.833333                [RUNNING]  Bag Time:      6.810146   Duration: 5.810146 / 19.833333                [RUNNING]  Bag Time:      6.971781   Duration: 5.971781 / 19.833333                [RUNNING]  Bag Time:      7.133422   Duration: 6.133422 / 19.833333                [RUNNING]  Bag Time:      7.295036   Duration: 6.295036 / 19.833333                [RUNNING]  Bag Time:      7.497108   Duration: 6.497108 / 19.833333                [RUNNING]  Bag Time:      7.658353   Duration: 6.658353 / 19.833333                [RUNNING]  Bag Time:      7.820009   Duration: 6.820009 / 19.833333                [RUNNING]  Bag Time:      7.981624   Duration: 6.981624 / 19.833333                [RUNNING]  Bag Time:      8.143338   Duration: 7.143338 / 19.833333                [RUNNING]  Bag Time:      8.304922   Duration: 7.304922 / 19.833333                [RUNNING]  Bag Time:      8.466475   Duration: 7.466475 / 19.833333                [RUNNING]  Bag Time:      8.627988   Duration: 7.627988 / 19.833333                [RUNNING]  Bag Time:      8.829606   Duration: 7.829606 / 19.833333                [RUNNING]  Bag Time:      8.991242   Duration: 7.991242 / 19.833333                [RUNNING]  Bag Time:      9.152854   Duration: 8.152854 / 19.833333                [RUNNING]  Bag Time:      9.314020   Duration: 8.314020 / 19.833333                [RUNNING]  Bag Time:      9.475379   Duration: 8.475379 / 19.833333                [RUNNING]  Bag Time:      9.636771   Duration: 8.636771 / 19.833333                [RUNNING]  Bag Time:      9.798454   Duration: 8.798454 / 19.833333                [RUNNING]  Bag Time:      9.960071   Duration: 8.960071 / 19.833333                [RUNNING]  Bag Time:     10.162214   Duration: 9.162214 / 19.833333                [RUNNING]  Bag Time:     10.323920   Duration: 9.323920 / 19.833333                [RUNNING]  Bag Time:     10.485415   Duration: 9.485415 / 19.833333                [RUNNING]  Bag Time:     10.647054   Duration: 9.647054 / 19.833333                [RUNNING]  Bag Time:     10.808778   Duration: 9.808778 / 19.833333                [RUNNING]  Bag Time:     10.970351   Duration: 9.970351 / 19.833333                [RUNNING]  Bag Time:     11.132010   Duration: 10.132010 / 19.833333                [RUNNING]  Bag Time:     11.293609   Duration: 10.293609 / 19.833333                [RUNNING]  Bag Time:     11.495592   Duration: 10.495592 / 19.833333                [RUNNING]  Bag Time:     11.657284   Duration: 10.657284 / 19.833333                [RUNNING]  Bag Time:     11.818931   Duration: 10.818931 / 19.833333                [RUNNING]  Bag Time:     11.980642   Duration: 10.980642 / 19.833333                [RUNNING]  Bag Time:     12.142189   Duration: 11.142189 / 19.833333                [RUNNING]  Bag Time:     12.303749   Duration: 11.303749 / 19.833333                [RUNNING]  Bag Time:     12.465306   Duration: 11.465306 / 19.833333                [RUNNING]  Bag Time:     12.626919   Duration: 11.626919 / 19.833333                [RUNNING]  Bag Time:     12.828862   Duration: 11.828862 / 19.833333                [RUNNING]  Bag Time:     12.990577   Duration: 11.990577 / 19.833333                [RUNNING]  Bag Time:     13.152243   Duration: 12.152243 / 19.833333                [RUNNING]  Bag Time:     13.313536   Duration: 12.313536 / 19.833333                [RUNNING]  Bag Time:     13.475191   Duration: 12.475191 / 19.833333                [RUNNING]  Bag Time:     13.636942   Duration: 12.636942 / 19.833333                [RUNNING]  Bag Time:     13.798632   Duration: 12.798632 / 19.833333                [RUNNING]  Bag Time:     13.960008   Duration: 12.960008 / 19.833333                [RUNNING]  Bag Time:     14.161923   Duration: 13.161923 / 19.833333                [RUNNING]  Bag Time:     14.323053   Duration: 13.323053 / 19.833333                [RUNNING]  Bag Time:     14.484459   Duration: 13.484459 / 19.833333                [RUNNING]  Bag Time:     14.645949   Duration: 13.645949 / 19.833333                [RUNNING]  Bag Time:     14.807242   Duration: 13.807242 / 19.833333                [RUNNING]  Bag Time:     14.968929   Duration: 13.968929 / 19.833333                [RUNNING]  Bag Time:     15.130615   Duration: 14.130615 / 19.833333                [RUNNING]  Bag Time:     15.332564   Duration: 14.332564 / 19.833333                [RUNNING]  Bag Time:     15.494178   Duration: 14.494178 / 19.833333                [RUNNING]  Bag Time:     15.655547   Duration: 14.655547 / 19.833333                [RUNNING]  Bag Time:     15.817247   Duration: 14.817247 / 19.833333                [RUNNING]  Bag Time:     15.978931   Duration: 14.978931 / 19.833333                [RUNNING]  Bag Time:     16.140623   Duration: 15.140623 / 19.833333                [RUNNING]  Bag Time:     16.302085   Duration: 15.302085 / 19.833333                [RUNNING]  Bag Time:     16.463718   Duration: 15.463718 / 19.833333                [RUNNING]  Bag Time:     16.665801   Duration: 15.665801 / 19.833333                [RUNNING]  Bag Time:     16.827384   Duration: 15.827384 / 19.833333                [RUNNING]  Bag Time:     16.988826   Duration: 15.988826 / 19.833333                [RUNNING]  Bag Time:     17.150190   Duration: 16.150190 / 19.833333                [RUNNING]  Bag Time:     17.311327   Duration: 16.311327 / 19.833333                [RUNNING]  Bag Time:     17.472457   Duration: 16.472457 / 19.833333                [RUNNING]  Bag Time:     17.633596   Duration: 16.633596 / 19.833333                [RUNNING]  Bag Time:     17.795189   Duration: 16.795189 / 19.833333                [RUNNING]  Bag Time:     17.997258   Duration: 16.997258 / 19.833333                [RUNNING]  Bag Time:     18.158960   Duration: 17.158960 / 19.833333                [RUNNING]  Bag Time:     18.320645   Duration: 17.320645 / 19.833333                [RUNNING]  Bag Time:     18.482039   Duration: 17.482039 / 19.833333                [RUNNING]  Bag Time:     18.643575   Duration: 17.643575 / 19.833333                [RUNNING]  Bag Time:     18.804720   Duration: 17.804720 / 19.833333                [RUNNING]  Bag Time:     18.966196   Duration: 17.966196 / 19.833333                [RUNNING]  Bag Time:     19.127827   Duration: 18.127827 / 19.833333                [RUNNING]  Bag Time:     19.329921   Duration: 18.329921 / 19.833333                [RUNNING]  Bag Time:     19.491618   Duration: 18.491618 / 19.833333                [RUNNING]  Bag Time:     19.653334   Duration: 18.653334 / 19.833333                [RUNNING]  Bag Time:     19.814962   Duration: 18.814962 / 19.833333                [RUNNING]  Bag Time:     19.976711   Duration: 18.976711 / 19.833333                [RUNNING]  Bag Time:     20.138227   Duration: 19.138227 / 19.833333                [RUNNING]  Bag Time:     20.299800   Duration: 19.299800 / 19.833333                [RUNNING]  Bag Time:     20.461484   Duration: 19.461484 / 19.833333                [RUNNING]  Bag Time:     20.663556   Duration: 19.663556 / 19.833333               
-Done.
-total 1380
-drwxr-xr-x 2 root root   4096 Oct 23 11:40 .
-drwxr-xr-x 4 root root   4096 Oct 23 11:35 ..
--rw-r--r-- 1 root root  89033 Oct 23 11:35 lk_tracks_0000.png
--rw-r--r-- 1 root root  92989 Oct 23 11:35 lk_tracks_0010.png
--rw-r--r-- 1 root root  98390 Oct 23 11:35 lk_tracks_0020.png
--rw-r--r-- 1 root root  90035 Oct 23 11:35 lk_tracks_0030.png
--rw-r--r-- 1 root root  93460 Oct 23 11:35 lk_tracks_0040.png
--rw-r--r-- 1 root root  83114 Oct 23 11:35 lk_tracks_0050.png
--rw-r--r-- 1 root root  97147 Oct 23 11:35 lk_tracks_0060.png
--rw-r--r-- 1 root root  83517 Oct 23 11:35 lk_tracks_0070.png
--rw-r--r-- 1 root root  83344 Oct 23 11:35 lk_tracks_0080.png
--rw-r--r-- 1 root root 103312 Oct 23 11:35 lk_tracks_0090.png
--rw-r--r-- 1 root root  92549 Oct 23 11:35 lk_tracks_0100.png
--rw-r--r-- 1 root root 106718 Oct 23 11:35 lk_tracks_0110.png
--rw-r--r-- 1 root root 129951 Oct 23 11:40 orb_matches_inliers_outliers.png
--rw-r--r-- 1 root root 131451 Oct 23 11:40 sift_matches_inliers_outliers.png
-
-------------------------------------------------------------------------
-## D8：Farneback 稠密光流
-
-------------------------------------------------------------------------
-[1;36m[ci][0m roscore 就绪（pid=5709）
-Waiting 0.2 seconds after advertising topics... done.
-
-Hit space to toggle paused, or 's' to step.
- [RUNNING]  Bag Time:      1.000000   Duration: 0.000000 / 19.833333                [RUNNING]  Bag Time:      1.161599   Duration: 0.161599 / 19.833333                [RUNNING]  Bag Time:      1.322766   Duration: 0.322766 / 19.833333                [RUNNING]  Bag Time:      1.483971   Duration: 0.483971 / 19.833333                [RUNNING]  Bag Time:      1.645205   Duration: 0.645205 / 19.833333                [RUNNING]  Bag Time:      1.806402   Duration: 0.806402 / 19.833333                [RUNNING]  Bag Time:      1.967599   Duration: 0.967599 / 19.833333                [RUNNING]  Bag Time:      2.128775   Duration: 1.128775 / 19.833333                [RUNNING]  Bag Time:      2.330270   Duration: 1.330270 / 19.833333                [RUNNING]  Bag Time:      2.491442   Duration: 1.491442 / 19.833333                [RUNNING]  Bag Time:      2.652620   Duration: 1.652620 / 19.833333                [RUNNING]  Bag Time:      2.813778   Duration: 1.813778 / 19.833333                [RUNNING]  Bag Time:      2.975061   Duration: 1.975061 / 19.833333                [RUNNING]  Bag Time:      3.136261   Duration: 2.136261 / 19.833333                [RUNNING]  Bag Time:      3.297446   Duration: 2.297446 / 19.833333                [RUNNING]  Bag Time:      3.498901   Duration: 2.498901 / 19.833333                [RUNNING]  Bag Time:      3.660086   Duration: 2.660086 / 19.833333                [RUNNING]  Bag Time:      3.821232   Duration: 2.821232 / 19.833333                [RUNNING]  Bag Time:      3.982465   Duration: 2.982465 / 19.833333                [RUNNING]  Bag Time:      4.143561   Duration: 3.143561 / 19.833333                [RUNNING]  Bag Time:      4.304750   Duration: 3.304750 / 19.833333                [RUNNING]  Bag Time:      4.465963   Duration: 3.465963 / 19.833333                [RUNNING]  Bag Time:      4.627131   Duration: 3.627131 / 19.833333                [RUNNING]  Bag Time:      4.828362   Duration: 3.828362 / 19.833333                [RUNNING]  Bag Time:      4.989518   Duration: 3.989518 / 19.833333                [RUNNING]  Bag Time:      5.150561   Duration: 4.150561 / 19.833333                [RUNNING]  Bag Time:      5.311776   Duration: 4.311776 / 19.833333                [RUNNING]  Bag Time:      5.472954   Duration: 4.472954 / 19.833333                [RUNNING]  Bag Time:      5.634123   Duration: 4.634123 / 19.833333                [RUNNING]  Bag Time:      5.795319   Duration: 4.795319 / 19.833333                [RUNNING]  Bag Time:      5.996763   Duration: 4.996763 / 19.833333                [RUNNING]  Bag Time:      6.157915   Duration: 5.157915 / 19.833333                [RUNNING]  Bag Time:      6.319067   Duration: 5.319067 / 19.833333                [RUNNING]  Bag Time:      6.480235   Duration: 5.480235 / 19.833333                [RUNNING]  Bag Time:      6.641390   Duration: 5.641390 / 19.833333                [RUNNING]  Bag Time:      6.802774   Duration: 5.802774 / 19.833333                [RUNNING]  Bag Time:      6.964099   Duration: 5.964099 / 19.833333                [RUNNING]  Bag Time:      7.165588   Duration: 6.165588 / 19.833333                [RUNNING]  Bag Time:      7.326911   Duration: 6.326911 / 19.833333                [RUNNING]  Bag Time:      7.488223   Duration: 6.488223 / 19.833333                [RUNNING]  Bag Time:      7.649350   Duration: 6.649350 / 19.833333                [RUNNING]  Bag Time:      7.810607   Duration: 6.810607 / 19.833333                [RUNNING]  Bag Time:      7.971772   Duration: 6.971772 / 19.833333                [RUNNING]  Bag Time:      8.132978   Duration: 7.132978 / 19.833333                [RUNNING]  Bag Time:      8.294203   Duration: 7.294203 / 19.833333                [RUNNING]  Bag Time:      8.495732   Duration: 7.495732 / 19.833333                [RUNNING]  Bag Time:      8.656855   Duration: 7.656855 / 19.833333                [RUNNING]  Bag Time:      8.817966   Duration: 7.817966 / 19.833333                [RUNNING]  Bag Time:      8.979376   Duration: 7.979376 / 19.833333                [RUNNING]  Bag Time:      9.140483   Duration: 8.140483 / 19.833333                [RUNNING]  Bag Time:      9.301590   Duration: 8.301590 / 19.833333                [RUNNING]  Bag Time:      9.462491   Duration: 8.462491 / 19.833333                [RUNNING]  Bag Time:      9.663949   Duration: 8.663949 / 19.833333                [RUNNING]  Bag Time:      9.825199   Duration: 8.825199 / 19.833333                [RUNNING]  Bag Time:      9.986469   Duration: 8.986469 / 19.833333                [RUNNING]  Bag Time:     10.147591   Duration: 9.147591 / 19.833333                [RUNNING]  Bag Time:     10.308693   Duration: 9.308693 / 19.833333                [RUNNING]  Bag Time:     10.469791   Duration: 9.469791 / 19.833333                [RUNNING]  Bag Time:     10.630876   Duration: 9.630876 / 19.833333                [RUNNING]  Bag Time:     10.832251   Duration: 9.832251 / 19.833333                [RUNNING]  Bag Time:     10.993393   Duration: 9.993393 / 19.833333                [RUNNING]  Bag Time:     11.154500   Duration: 10.154500 / 19.833333                [RUNNING]  Bag Time:     11.315737   Duration: 10.315737 / 19.833333                [RUNNING]  Bag Time:     11.476836   Duration: 10.476836 / 19.833333                [RUNNING]  Bag Time:     11.637966   Duration: 10.637966 / 19.833333                [RUNNING]  Bag Time:     11.799083   Duration: 10.799083 / 19.833333                [RUNNING]  Bag Time:     11.960204   Duration: 10.960204 / 19.833333                [RUNNING]  Bag Time:     12.161642   Duration: 11.161642 / 19.833333                [RUNNING]  Bag Time:     12.322806   Duration: 11.322806 / 19.833333                [RUNNING]  Bag Time:     12.484140   Duration: 11.484140 / 19.833333                [RUNNING]  Bag Time:     12.645342   Duration: 11.645342 / 19.833333                [RUNNING]  Bag Time:     12.806496   Duration: 11.806496 / 19.833333                [RUNNING]  Bag Time:     12.967617   Duration: 11.967617 / 19.833333                [RUNNING]  Bag Time:     13.128782   Duration: 12.128782 / 19.833333                [RUNNING]  Bag Time:     13.330254   Duration: 12.330254 / 19.833333                [RUNNING]  Bag Time:     13.491371   Duration: 12.491371 / 19.833333                [RUNNING]  Bag Time:     13.652484   Duration: 12.652484 / 19.833333                [RUNNING]  Bag Time:     13.813720   Duration: 12.813720 / 19.833333                [RUNNING]  Bag Time:     13.974857   Duration: 12.974857 / 19.833333                [RUNNING]  Bag Time:     14.135975   Duration: 13.135975 / 19.833333                [RUNNING]  Bag Time:     14.297102   Duration: 13.297102 / 19.833333                [RUNNING]  Bag Time:     14.498574   Duration: 13.498574 / 19.833333                [RUNNING]  Bag Time:     14.659851   Duration: 13.659851 / 19.833333                [RUNNING]  Bag Time:     14.821133   Duration: 13.821133 / 19.833333                [RUNNING]  Bag Time:     14.982209   Duration: 13.982209 / 19.833333                [RUNNING]  Bag Time:     15.143322   Duration: 14.143322 / 19.833333                [RUNNING]  Bag Time:     15.304591   Duration: 14.304591 / 19.833333                [RUNNING]  Bag Time:     15.465988   Duration: 14.465988 / 19.833333                [RUNNING]  Bag Time:     15.627128   Duration: 14.627128 / 19.833333                [RUNNING]  Bag Time:     15.828430   Duration: 14.828430 / 19.833333                [RUNNING]  Bag Time:     15.989563   Duration: 14.989563 / 19.833333                [RUNNING]  Bag Time:     16.150572   Duration: 15.150572 / 19.833333                [RUNNING]  Bag Time:     16.311682   Duration: 15.311682 / 19.833333                [RUNNING]  Bag Time:     16.472986   Duration: 15.472986 / 19.833333                [RUNNING]  Bag Time:     16.634384   Duration: 15.634384 / 19.833333                [RUNNING]  Bag Time:     16.795797   Duration: 15.795797 / 19.833333                [RUNNING]  Bag Time:     16.997260   Duration: 15.997260 / 19.833333                [RUNNING]  Bag Time:     17.158278   Duration: 16.158278 / 19.833333                [RUNNING]  Bag Time:     17.319567   Duration: 16.319567 / 19.833333                [RUNNING]  Bag Time:     17.480667   Duration: 16.480667 / 19.833333                [RUNNING]  Bag Time:     17.641811   Duration: 16.641811 / 19.833333                [RUNNING]  Bag Time:     17.803006   Duration: 16.803006 / 19.833333                [RUNNING]  Bag Time:     17.964086   Duration: 16.964086 / 19.833333                [RUNNING]  Bag Time:     18.165505   Duration: 17.165505 / 19.833333                [RUNNING]  Bag Time:     18.326618   Duration: 17.326618 / 19.833333                [RUNNING]  Bag Time:     18.487757   Duration: 17.487757 / 19.833333                [RUNNING]  Bag Time:     18.648920   Duration: 17.648920 / 19.833333                [RUNNING]  Bag Time:     18.810082   Duration: 17.810082 / 19.833333                [RUNNING]  Bag Time:     18.971290   Duration: 17.971290 / 19.833333                [RUNNING]  Bag Time:     19.132440   Duration: 18.132440 / 19.833333                [RUNNING]  Bag Time:     19.293793   Duration: 18.293793 / 19.833333                [RUNNING]  Bag Time:     19.496285   Duration: 18.496285 / 19.833333                [RUNNING]  Bag Time:     19.657846   Duration: 18.657846 / 19.833333                [RUNNING]  Bag Time:     19.819011   Duration: 18.819011 / 19.833333                [RUNNING]  Bag Time:     19.980181   Duration: 18.980181 / 19.833333                [RUNNING]  Bag Time:     20.141358   Duration: 19.141358 / 19.833333                [RUNNING]  Bag Time:     20.302562   Duration: 19.302562 / 19.833333                [RUNNING]  Bag Time:     20.463700   Duration: 19.463700 / 19.833333                [RUNNING]  Bag Time:     20.665144   Duration: 19.665144 / 19.833333               
-Done.
-[1;33m[ci][0m 节点 30s 没退出，SIGINT
-[0m[ INFO] [1792755665.258763238]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0000.png[0m
-[0m[ INFO] [1792755665.672607890]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0010.png[0m
-[0m[ INFO] [1792755666.090846602]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0020.png[0m
-[0m[ INFO] [1792755666.505847973]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0030.png[0m
-[0m[ INFO] [1792755666.922552238]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0040.png[0m
-[0m[ INFO] [1792755667.338812346]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0050.png[0m
-[0m[ INFO] [1792755667.756019982]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0060.png[0m
-[0m[ INFO] [1792755668.173495450]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0070.png[0m
-[0m[ INFO] [1792755668.589057625]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0080.png[0m
-[0m[ INFO] [1792755669.005025288]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0090.png[0m
--rw-r--r-- 1 root root 28742 Oct 23 11:41 self_flow_0000.png
--rw-r--r-- 1 root root 59934 Oct 23 11:41 self_flow_0010.png
--rw-r--r-- 1 root root 57718 Oct 23 11:41 self_flow_0020.png
--rw-r--r-- 1 root root 60881 Oct 23 11:41 self_flow_0030.png
--rw-r--r-- 1 root root 55655 Oct 23 11:41 self_flow_0040.png
--rw-r--r-- 1 root root 50143 Oct 23 11:41 self_flow_0050.png
--rw-r--r-- 1 root root 68376 Oct 23 11:41 self_flow_0060.png
--rw-r--r-- 1 root root 54839 Oct 23 11:41 self_flow_0070.png
--rw-r--r-- 1 root root 43783 Oct 23 11:41 self_flow_0080.png
--rw-r--r-- 1 root root 36075 Oct 23 11:41 self_flow_0090.png
--rw-r--r-- 1 root root 51239 Oct 23 11:41 self_flow_0100.png
--rw-r--r-- 1 root root 48923 Oct 23 11:41 self_flow_0110.png
-报告已写出：/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/report.md（106 行）
-# LAB5 CI 运行报告
-
-生成时间：2026-10-23 11:41:47（UTC）
-- `GITHUB_REPOSITORY` = `masai114514/vnav-lab5-ci`
-- `GITHUB_SHA` = `abd8966a3a2b6dfe5095b78d97681464eed23624`
-- `GITHUB_RUN_ID` = `39946943221`
-- `GITHUB_REF_NAME` = `main`
-- 通过的 stage：env, apt, build_deps, build_main, pair, self_flow
-- **失败的 stage**：video
-
-## 1. 图像对统计（D3 / D5）
-
-官方 `two_frames_tracking.launch`，`images/box.png` + `images/box_in_scene.png`，`mode:=0`。
-
-| 描述子 | kp1 | kp2 | 匹配数 | 良好匹配(Lowe 0.8) | 内点 | 内点率 | 样本数 | 备注 |
-|---|---|---|---|---|---|---|---|---|
-| SIFT | 603 | 969 | 603 | 98 | 76 | 77.6 % | 1 | 与官方 603/969/93/78 差 0 个 kp1 |
-| SURF | 997 | 1822 | 997 | 138 | 91 | 65.9 % | 1 |  |
-| ORB | 500 | 500 | 500 | 13 | 7 | 53.8 % | 1 |  |
-| FAST | 2266 | 3653 | 2266 | 41 | 17 | 41.5 % | 1 |  |
-
-> 官方参考解：603 / 969 / 93 / 78 / 83.9 %。本机复算：603 / 969 / 603 / 98 / 77.6 %。
-
-## 2. 视频序列统计（D6 / D7）
-
-测试序列：`data/seq20s.mp4` → `ci_tools/mp4_to_bag` → `seq20s.bag`（与 TESSE 同话题）。
-
-```
-path:        /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
-version:     2.0
-duration:    19.8s
-start:       Jan 01 1970 00:00:01.00 (1.00)
-end:         Jan 01 1970 00:00:20.83 (20.83)
-size:        22.0 MB
-messages:    240
-compression: none [25/25 chunks]
-types:       rosgraph_msgs/Clock [a9c97c1d230cfc112e270351a944ee47]
-             sensor_msgs/Image   [060021388200f6f0f447d0fcd9c64743]
-topics:      /clock                          120 msgs    : rosgraph_msgs/Clock
-             /tesse/left_cam/rgb/image_raw   120 msgs    : sensor_msgs/Image
-```
-
-| 描述子 | kp1 | kp2 | 匹配数 | 良好匹配 | 内点 | 内点率 | 样本数 |
-|---|---|---|---|---|---|---|---|
-| LK | 72 | 64 | 64 | 64 | 44 | 71.4 % | 114 |
-
-## 3. 可视化产物（D4 / D6 / D7 / D8）
-
-共 46 张，全部在 `out/fig/`：
-
-```

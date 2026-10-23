@@ -40,7 +40,10 @@ DEFAULT_REPO = "masai114514/vnav-lab5-ci"
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # 不推的东西
-SKIP_DIRS = {".git", "out", "__pycache__", ".github/workflows/.backup"}
+# ci_runs/ 是下载下来的运行产物（46 张 PNG + 日志，十几 MB），不该进仓；
+# 之前在加入这条之前推过一次，远端残留了这些文件，脚本的「删除远端多余文件」
+# 逻辑会在下次推送时把它们清掉。
+SKIP_DIRS = {".git", "out", "ci_runs", "__pycache__", ".github/workflows/.backup"}
 SKIP_SUFFIX = (".pyc", ".DS_Store")
 SKIP_FILES = {".DS_Store"}
 

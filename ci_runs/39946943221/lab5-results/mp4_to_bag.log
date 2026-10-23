@@ -1,3 +1,0 @@
-[mp4_to_bag] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/data/seq20s.mp4 -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
-             120 帧 320x200 @ 6.00 fps, 时长 20.00 s
-             topic=/tesse/left_cam/rgb/image_raw  (另写 /clock)
