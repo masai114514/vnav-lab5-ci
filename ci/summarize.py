@@ -137,9 +137,12 @@ def main() -> int:
 
     video = {}
     for name in ("LK", "SIFT", "ORB"):
-        st = parse_stats(read(os.path.join(out, "video_%s.log" % name)))
-        if st:
-            video[name] = st
+        # Run #9 起节点日志单独成文件（node_video_*.log），老名字留作兜底
+        for cand in ("node_video_%s.log" % name, "video_%s.log" % name):
+            st = parse_stats(read(os.path.join(out, cand)))
+            if st:
+                video[name] = st
+                break
 
     figs = find_figs(figdir)
     build = read(os.path.join(out, "build_evidence.txt"))

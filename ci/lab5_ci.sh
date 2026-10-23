@@ -533,30 +533,36 @@ s_video() {
 
   start_master || return 1
   for desc in ${VIDEO_DESCRIPTORS:-LK SIFT ORB}; do
-    banner "视频序列：descriptor:=$desc（max_frames=$nframes）"
-    rosrun lab_5 track_features \
+    banner "视频序列：descriptor:=$desc（max_frames=$nframes, idle_timeout=10 s）"
+    # 节点和 rosbag 的日志**必须分开**：Run #9 里两者写同一个文件，节点的输出
+    # 在 SIGINT/KILL 时随缓冲区一起丢了，日志里只剩 rosbag 的进度条，于是
+    # 「明明跑了、图也存了，却被判成没有统计」。stdbuf -oL 强制行缓冲，保证
+    # 就算被 KILL 也能看到它跑到哪一步。
+    local nlog="$OUT/node_video_${desc}.log"
+    stdbuf -oL -eL rosrun lab_5 track_features \
       _mode:=1 \
       _descriptor:="$desc" \
       _output_dir:="$figdir" \
       _interactive:=false \
       _lk_save_every:=10 \
       _max_frames:="$nframes" \
+      _idle_timeout:=10.0 \
       /images_topic:=/camera/color/image_raw \
-      > "$OUT/video_${desc}.log" 2>&1 &
+      > "$nlog" 2>&1 &
     node_pid=$!
     # 等 image_transport 把订阅建起来，否则前几帧会被丢掉
     sleep 3
     # -r 4：20 s 的 bag 5 s 放完，后面全是节点自己的处理时间（不再受播放速度限制）
     timeout -s INT 200 rosbag play --clock -r 4 "$OUT/seq20s.bag" \
       /tesse/left_cam/rgb/image_raw:=/camera/color/image_raw \
-      >> "$OUT/video_${desc}.log" 2>&1 || true
-    wait_node "$node_pid" 300 || true
+      > "$OUT/bagplay_${desc}.log" 2>&1 || true
+    wait_node "$node_pid" 240 || true
     echo "-------- 视频累计统计 --------"
-    if grep -E 'Avg\.|Num\. of samples' "$OUT/video_${desc}.log"; then
+    if grep -E 'Avg\.|Num\. of samples' "$nlog"; then
       :
     else
       warn "$desc 视频模式没有打出统计"
-      tail -15 "$OUT/video_${desc}.log" || true
+      tail -15 "$nlog" || true
       bad=1
     fi
   done

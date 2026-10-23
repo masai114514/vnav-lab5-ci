@@ -1,0 +1,28 @@
+# catkin build 证据
+
+## 编译环境
+- ROS: melodic
+- gcc: 7
+- OpenCV: #define CV_VERSION_MAJOR    3
+
+## lab_5 产物
+total 16
+drwxr-xr-x 2 root root 4096 Oct 23 11:35 .
+drwxr-xr-x 7 root root 4096 Oct 23 11:35 ..
+lrwxrwxrwx 1 root root   92 Oct 23 11:35 self_flow -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/self_flow
+lrwxrwxrwx 1 root root   97 Oct 23 11:35 track_features -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/track_features
+
+## OpenCV 版本（运行时实际链接到的那一份）
+	libopencv_core.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_core.so.3.4 (0x00007f02a0e00000)
+	libopencv_highgui.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_highgui.so.3.4 (0x00007f02a0a00000)
+	libopencv_imgcodecs.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgcodecs.so.3.4 (0x00007f02a0200000)
+	libopencv_calib3d.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_calib3d.so.3.4 (0x00007f029e400000)
+	libopencv_features2d.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_features2d.so.3.4 (0x00007f029e000000)
+	libopencv_flann.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_flann.so.3.4 (0x00007f029dc00000)
+	libopencv_imgproc.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgproc.so.3.4 (0x00007f029b200000)
+	libopencv_video.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_video.so.3.4 (0x00007f029ac00000)
+
+## cv_bridge 链接到的 OpenCV
+	libopencv_imgcodecs.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgcodecs.so.3.4 (0x00007f69d2c00000)
+	libopencv_imgproc.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgproc.so.3.4 (0x00007f69d0000000)
+	libopencv_core.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_core.so.3.4 (0x00007f69cf000000)
