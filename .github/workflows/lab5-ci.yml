@@ -60,6 +60,8 @@ on:
 
 permissions:
   contents: read
+  # 需要写权限才能删掉「同名但内容残缺」的缓存条目（见下面 save 那一步）
+  actions: write
 
 # 同一分支连续推两次时，取消上一趟 —— OpenCV 那步耗不起重复编译
 concurrency:
@@ -77,6 +79,12 @@ jobs:
     runs-on: ubuntu-22.04
     # 首次（无缓存）OpenCV 3.4.2 编译 + 全部测试 ≈ 45 分钟，留足余量
     timeout-minutes: 75
+
+    env:
+      # 缓存 key 只在这一处定义，restore / 删除旧条目 / save 三处共用，
+      # 免得手抄不一致。v2 是因为 v1 里被塞进过一个 120 KB 的半成品
+      # （Run #3 被 concurrency 取消时存的），见 ci/lab5_ci.sh 的 deps_ready 注释。
+      CACHE_KEY: deps-melodic-nonfree-v2-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -96,9 +104,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ws_deps/install
-          key: deps-melodic-nonfree-v1-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
+          key: ${{ env.CACHE_KEY }}
           restore-keys: |
-            deps-melodic-nonfree-v1-
+            deps-melodic-nonfree-v2-
 
       - name: 环境信息
         shell: bash
@@ -148,15 +156,47 @@ jobs:
           echo "lab5_ci.sh 退出码 = $rc"
           exit $rc
 
-      # 无论主流程成没成功，只要这次是「自己编出来的」就把 OpenCV 存下来。
+      # 这一趟到底是「真编出来的」还是「命中缓存」？只有真编出来才允许写缓存。
+      # 标记由 ci/lab5_ci.sh 在 s_build_deps 末尾、四项依赖全验过之后才写。
+      - name: 检查 deps 是否可缓存
+        id: deps-fresh
+        if: always()
+        shell: bash
+        run: |
+          if [ -f out/.deps_fresh ]; then
+            echo "ok=1" >> "$GITHUB_OUTPUT"
+            echo "本趟真的编译了依赖，允许写缓存"
+          else
+            echo "ok=0" >> "$GITHUB_OUTPUT"
+            echo "本趟没有完整编译依赖，不写缓存"
+          fi
+
+      # 无论主流程成没成功，只要是「自己编出来的」就把 OpenCV 存下来。
       # 首次跑挂在 SIFT 之外的地方（比如 SURF 的 nonfree、cv_bridge）时，
       # 下一趟就能直接命中缓存，不用再烧 25 分钟。
+      #
+      # 先删同名旧条目：actions/cache/save 遇到已存在的 key 会**直接报错**，
+      # 而 restore-keys 能把 v2- 前缀下的旧条目恢复过来，于是「key 已存在但内容
+      # 是半成品」这种情况必须能覆盖掉。
+      - name: 删除同名旧缓存（可能是半成品）
+        if: always() && steps.deps-fresh.outputs.ok == '1'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ids=$(gh api "repos/$GITHUB_REPOSITORY/actions/caches?key=$CACHE_KEY" \
+                  --jq '.actions_caches[].id' 2>/dev/null || true)
+          for id in $ids; do
+            echo "删除旧缓存条目 id=$id"
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/caches/$id" || true
+          done
+
       - name: 保存 OpenCV 依赖缓存
-        if: always() && steps.deps-cache.outputs.cache-hit != 'true'
+        if: always() && steps.deps-fresh.outputs.ok == '1'
         uses: actions/cache/save@v4
         with:
           path: ws_deps/install
-          key: deps-melodic-nonfree-v1-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
+          key: ${{ env.CACHE_KEY }}
 
       - name: 上传产物
         if: always()

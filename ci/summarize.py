@@ -11,7 +11,10 @@
   python3 ci/summarize.py --out out --pass "env,apt,..." --fail ""
 """
 
-from __future__ import annotations
+# 注意：这里**不能**写 `from __future__ import annotations`。
+# 它要求 Python ≥ 3.7，而 ros:melodic 容器（Ubuntu 18.04）里是 3.6，
+# 一导入就 SyntaxError: future feature annotations is not defined。
+# 本文件所有注解用的都是内建类型（`-> dict` / `-> list`），3.6 直接跑没问题。
 
 import argparse
 import os

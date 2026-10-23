@@ -1,0 +1,9 @@
+# catkin build 证据
+
+## 编译环境
+- ROS: melodic
+- gcc: 7
+- OpenCV: #define CV_VERSION_MAJOR    3
+
+## lab_5 产物
+ls: cannot access '/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/lib/lab_5/': No such file or directory

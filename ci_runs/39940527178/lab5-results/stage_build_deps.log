@@ -1,0 +1,411 @@
+[1;36m[ci][0m deps 缓存未命中 —— 开始编译（首次约 20 分钟）
+[1;33m[ci][0m clone 失败（第 1 次）：https://github.com/ethz-asl/gflags_catkin.git
+88:    # LAB5 补丁：OpenCV 3.4.2 的 xfeatures2d 里 SIFT/SURF 由 OPENCV_ENABLE_NONFREE 控制，
+90:    -DOPENCV_ENABLE_NONFREE=ON
+93:  BUILD_COMMAND cd ../${OPENCV_BUILD_PATH} && make -j$(nproc)
+NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
+--------------------------------------------------------------------------------
+Profile:                     default
+Extending:        [explicit] /opt/ros/melodic
+Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps
+--------------------------------------------------------------------------------
+Build Space:       [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build
+Devel Space:       [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/devel
+Install Space:     [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+Log Space:         [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/logs
+Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/src
+DESTDIR:            [unused] None
+--------------------------------------------------------------------------------
+Devel Space Layout:          linked
+Install Space Layout:        merged
+--------------------------------------------------------------------------------
+Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
+Additional Make Args:        None
+Additional catkin Make Args: None
+Internal Make Job Server:    True
+Cache Job Environments:      False
+--------------------------------------------------------------------------------
+Whitelisted Packages:        None
+Blacklisted Packages:        None
+--------------------------------------------------------------------------------
+Workspace configuration appears valid.
+
+Initialized new catkin workspace in `/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps`
+--------------------------------------------------------------------------------
+NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
+--------------------------------------------------------------------------------
+Profile:                     default
+Extending:        [explicit] /opt/ros/melodic
+Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps
+--------------------------------------------------------------------------------
+Build Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build
+Devel Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/devel
+Install Space:     [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+Log Space:         [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/logs
+Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/src
+DESTDIR:            [unused] None
+--------------------------------------------------------------------------------
+Devel Space Layout:          linked
+Install Space Layout:        merged
+--------------------------------------------------------------------------------
+Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
+Additional Make Args:        -j1
+Additional catkin Make Args: None
+Internal Make Job Server:    True
+Cache Job Environments:      False
+--------------------------------------------------------------------------------
+Whitelisted Packages:        None
+Blacklisted Packages:        None
+--------------------------------------------------------------------------------
+Workspace configuration appears valid.
+
+NOTE: Forcing CMake to run for each package.
+--------------------------------------------------------------------------------
+[build] Found '4' packages in 0.0 seconds.                                     
+Starting >>> catkin_tools_prebuild                                             
+[build 0.1 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.2 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.3 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.4 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.5 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.6 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.7 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.8 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 0.9 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.0 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.1 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.2 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.3 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.4 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.5 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.6 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.7 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.8 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 1.9 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 2.0 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 2.1 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:c... [build 2.2 s] [0/2 complete] [1/1 jobs] [0 queued] [catkin_tools_prebuild:i... Finished <<< catkin_tools_prebuild                [ 2.3 seconds ]              
+Starting >>> catkin_simple                                                     
+[build 2.3 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:loadenv -... [build 2.4 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.1] [build 2.5 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.2] [build 2.6 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.3] [build 2.7 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.4] [build 2.8 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.5] [build 2.9 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.6] [build 3.0 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.7] [build 3.1 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.8] [build 3.2 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 0.9] [build 3.3 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.0] [build 3.4 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.1] [build 3.5 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.2] [build 3.6 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.3] [build 3.7 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.4] [build 3.8 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.5] [build 3.9 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.6] [build 4.0 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.8] [build 4.1 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 1.9] [build 4.2 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 2.0] [build 4.3 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 2.1] [build 4.4 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:cmake - 2.2] [build 4.5 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:make - 2.3]  [build 4.6 s] [1/2 complete] [1/1 jobs] [0 queued] [catkin_simple:install -... Finished <<< catkin_simple                        [ 2.4 seconds ]              
+[build] Summary: All 2 packages succeeded!                                     
+[build] Ignored: 3 packages were skipped or are blacklisted.                   
+[build] Warnings: None.                                                        
+[build] Abandoned: No packages were abandoned.                                 
+[build] Failed: No packages failed.                                            
+[build] Runtime: 4.6 seconds total.                                            
+[build] Note: Workspace packages have changed, please re-source setup files to use them.
+NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
+_______________________________________________________________________________
+Warnings << gflags_catkin:make /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/logs/gflags_catkin/build.make.000.log
+make[3]: warning: -jN forced in submake: disabling jobserver mode.
+make[3]: warning: -jN forced in submake: disabling jobserver mode.
+cd /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/gflags_catkin; catkin build --get-env gflags_catkin | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -
+...............................................................................
+_______________________________________________________________________________
+Warnings << glog_catkin:make /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/logs/glog_catkin/build.make.000.log
+configure.ac:19: installing './compile'
+configure.ac:13: installing './missing'
+Makefile.am: installing './depcomp'
+parallel-tests: installing './test-driver'
+make[3]: warning: -jN forced in submake: disabling jobserver mode.
+In file included from src/logging_unittest.cc:58:0:
+src/googletest.h:579:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new(size_t size) throw(std::bad_alloc) {
+                                 ^~~~~
+src/googletest.h:586:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new[](size_t size) throw(std::bad_alloc) {
+                                   ^~~~~
+src/logging_unittest.cc: In function ?void TestDCHECK()?:
+src/logging_unittest.cc:568:3: warning: ?template<class> class std::auto_ptr? is deprecated [-Wdeprecated-declarations]
+   auto_ptr<int64> sptr(new int64);
+   ^~~~~~~~
+In file included from /usr/include/c++/7/bits/locale_conv.h:41:0,
+                 from /usr/include/c++/7/locale:43,
+                 from /usr/include/c++/7/iomanip:43,
+                 from src/logging_unittest.cc:44:
+/usr/include/c++/7/bits/unique_ptr.h:51:28: note: declared here
+   template<typename> class auto_ptr;
+                            ^~~~~~~~
+In file included from src/demangle_unittest.cc:41:0:
+src/googletest.h:579:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new(size_t size) throw(std::bad_alloc) {
+                                 ^~~~~
+src/googletest.h:586:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new[](size_t size) throw(std::bad_alloc) {
+                                   ^~~~~
+In file included from /usr/include/c++/7/ext/hash_set:60:0,
+                 from src/glog/stl_logging.h:73,
+                 from src/stl_logging_unittest.cc:62:
+/usr/include/c++/7/backward/backward_warning.h:32:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
+ #warning \
+  ^~~~~~~
+In file included from src/symbolize_unittest.cc:41:0:
+src/googletest.h:579:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new(size_t size) throw(std::bad_alloc) {
+                                 ^~~~~
+src/googletest.h:586:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new[](size_t size) throw(std::bad_alloc) {
+                                   ^~~~~
+In file included from src/utilities_unittest.cc:32:0:
+src/googletest.h:579:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new(size_t size) throw(std::bad_alloc) {
+                                 ^~~~~
+src/googletest.h:586:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new[](size_t size) throw(std::bad_alloc) {
+                                   ^~~~~
+In file included from src/stl_logging_unittest.cc:63:0:
+src/googletest.h:579:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new(size_t size) throw(std::bad_alloc) {
+                                 ^~~~~
+src/googletest.h:586:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ void* operator new[](size_t size) throw(std::bad_alloc) {
+                                   ^~~~~
+ar: `u' modifier ignored since `D' is the default (see `U')
+make[3]: warning: -jN forced in submake: disabling jobserver mode.
+cd /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/glog_catkin; catkin build --get-env glog_catkin | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -
+WARNING: Could not encode unicode characters. Please set the PYTHONIOENCODING environment variable to see complete output. (i.e. PYTHONIOENCODING=UTF-8)
+...............................................................................
+_______________________________________________________________________________
+Warnings << opencv3_catkin:make /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/logs/opencv3_catkin/build.make.000.log
+make[3]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+cc1: warning: ?-Werror=? argument ?-Werror=non-virtual-dtor? is not valid for C
+In member function ?void cv::EigenvalueDecomposition::compute(cv::InputArray, bool)?:
+cc1plus: warning: assuming signed overflow does not occur when assuming that (X - c) > X is always false [-Wstrict-overflow]
+In member function ?void EigenvalueDecomposition::compute(cv::InputArray)?:
+cc1plus: warning: assuming signed overflow does not occur when assuming that (X - c) > X is always false [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp: In member function ?virtual void cv::xfeatures2d::SURFInvoker::operator()(const cv::Range&) const?:
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+ }
+ ^
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:1009:1: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+     void operator()(const Range& range) const CV_OVERRIDE
+          ^~~~~~~~
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin/opencv3_contrib_src/modules/xfeatures2d/src/surf.cpp:566:10: warning: assuming signed overflow does not occur when assuming that (X + c) >= X is always true [-Wstrict-overflow]
+make[3]: warning: -jN forced in submake: disabling jobserver mode.
+cd /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build/opencv3_catkin; catkin build --get-env opencv3_catkin | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -
+...............................................................................
+--------------------------------------------------------------------------------
+Profile:                     default
+Extending:        [explicit] /opt/ros/melodic
+Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps
+--------------------------------------------------------------------------------
+Build Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/build
+Devel Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/devel
+Install Space:      [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+Log Space:          [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/logs
+Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/src
+DESTDIR:            [unused] None
+--------------------------------------------------------------------------------
+Devel Space Layout:          linked
+Install Space Layout:        merged
+--------------------------------------------------------------------------------
+Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
+Additional Make Args:        -j4
+Additional catkin Make Args: None
+Internal Make Job Server:    True
+Cache Job Environments:      False
+--------------------------------------------------------------------------------
+Whitelisted Packages:        None
+Blacklisted Packages:        None
+--------------------------------------------------------------------------------
+Workspace configuration appears valid.
+--------------------------------------------------------------------------------
+[build] Found '4' packages in 0.0 seconds.                                     
+Starting >>> catkin_simple                
+Finished <<< catkin_simple                 [ 0.2 seconds ]
+Starting >>> gflags_catkin                
+Starting >>> opencv3_catkin               
+Finished <<< gflags_catkin                 [ 8.5 seconds ]
+Starting >>> glog_catkin                  
+Finished <<< glog_catkin                   [ 24.0 seconds ]
+Finished <<< opencv3_catkin                [ 11 minutes and 59.7 seconds ]
+
+[build] Successful packages:
+
+ [Successful] catkin_simple 
+
+[build] Summary: All 4 packages succeeded!
+[build] Ignored: None.
+[build] Warnings: 3 packages succeeded with warnings.
+[build] Abandoned: No packages were abandoned.
+[build] Failed: No packages failed.
+[build] Runtime: 12 minutes and 0.0 seconds total.
+[build] Note: Workspace packages have changed, please re-source setup files to use them.
+  ✓ opencv3_catkin
+  ✓ glog_catkin
+  ✓ gflags_catkin
+  ✓ catkin_simple
+109M	/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+  libopencv*.so : 75 个
+#define OPENCV_ENABLE_NONFREE
+[1;36m[ci][0m xfeatures2d 头文件存在（SIFT/SURF 可用）

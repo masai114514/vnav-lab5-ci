@@ -1,0 +1,2 @@
+✗ 缺少可执行文件：/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/lib/lab_5/self_flow
+  lab_5 没编过 —— 先看 out/stage_build_main.log 里的 cmake 报错

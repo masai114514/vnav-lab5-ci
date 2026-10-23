@@ -1,4 +1,6 @@
 #include "orb_feature_tracker.h"
+
+#include <glog/logging.h>
 #include <opencv2/features2d.hpp>
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

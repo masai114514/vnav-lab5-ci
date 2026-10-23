@@ -147,9 +147,34 @@ s_apt() {
 # =============================================================================
 # S3 构建依赖工作区（OpenCV 3.4.2 + glog/gflags/catkin_simple）
 # =============================================================================
+
+# 某个依赖有没有真的产出 CMake config。
+# 不用 `find | grep -q`：grep 提前退出会给 find 送 SIGPIPE，pipefail 下变成 141。
+dep_ok() {
+  local f
+  f="$(find "$WS_DEPS/install" -name "$1Config.cmake" -print -quit 2>/dev/null)"
+  [ -n "$f" ]
+}
+
+# 缓存里的依赖工作区是否「真的」可用 —— 必须是四项 Config + libopencv 全在。
+#
+# 只看 install/setup.bash 会误判。实际踩到的：Run #3 在 10:37 起、10:38:59 被
+# concurrency 取消，它的 `actions/cache/save`（当时挂在 always() 上）把刚建了一半的
+# ws_deps/install（只有 catkin_simple，**120 KB**）存成了正式 key。Run #4 于是
+# restore 报 cache-hit=true —— 但那份东西连 OpenCV 都没有，脚本只好重编 12 分钟，
+# 而 save 又因为 cache-hit=true 被跳过，等于永远修不好。所以命中判定必须够严。
+deps_ready() {
+  [ -f "$WS_DEPS/install/setup.bash" ] || return 1
+  ls "$WS_DEPS/install/lib"/libopencv_core.so* >/dev/null 2>&1 || return 1
+  local d
+  for d in opencv3_catkin glog_catkin gflags_catkin catkin_simple; do
+    dep_ok "$d" || return 1
+  done
+  return 0
+}
+
 s_build_deps() {
-  if [ -f "$WS_DEPS/install/setup.bash" ] && \
-     grep -q "$WS_DEPS" "$WS_DEPS/install/setup.bash" 2>/dev/null; then
+  if deps_ready; then
     say "deps 缓存命中（$WS_DEPS/install 已就绪），跳过 OpenCV 编译"
     du -sh "$WS_DEPS/install"
     # catkin_tools 的 --extend 要找这个标记文件，cache 没存到就补一个
@@ -159,6 +184,9 @@ s_build_deps() {
     return 0
   fi
 
+  if [ -f "$WS_DEPS/install/setup.bash" ]; then
+    warn "缓存里的 install 不完整（半成品，见 deps_ready 注释）—— 丢掉重建"
+  fi
   say "deps 缓存未命中 —— 开始编译（首次约 20 分钟）"
   rm -rf "$WS_DEPS"
   mkdir -p "$WS_DEPS/src"
@@ -204,13 +232,6 @@ s_build_deps() {
   # 只看 install/setup.bash 是否存在是不够的：Run #2 里 glog_catkin 编译失败
   # （bionic 缺 autoreconf），setup.bash 照样生成，于是 deps 被误判为成功，
   # 一路拖到 s_build_main 才炸在 `Could not find glog_catkin`。
-  # 不用 `find | grep -q`：grep 提前退出会给 find 送 SIGPIPE，pipefail 下变成 141
-  dep_ok() {
-    local f
-    f="$(find "$WS_DEPS/install" -name "$1Config.cmake" -print -quit 2>/dev/null)"
-    [ -n "$f" ]
-  }
-
   local missing=() d
   for d in opencv3_catkin glog_catkin gflags_catkin catkin_simple; do
     if dep_ok "$d"; then
@@ -289,6 +310,12 @@ CMK
   else
     warn "找不到 xfeatures2d 头文件 —— SURF 行会缺"
   fi
+
+  # 给 workflow 用的「可缓存」标记：只有这一趟**真的从源码编出来、且四项都验过**
+  # 才写。半成品（比如被 concurrency 取消的 run）没有这个文件，cache/save 那步
+  # 就不会执行，避免再出现「命中的是 120 KB 半成品」那种事。
+  : > "$OUT/.deps_fresh"
+  say "已标记 deps 可缓存（out/.deps_fresh）"
   return 0
 }
 
