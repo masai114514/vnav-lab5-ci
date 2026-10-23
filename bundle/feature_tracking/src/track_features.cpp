@@ -175,12 +175,26 @@ int main(int argc,
     if (interactive) {
       cv::namedWindow("view", cv::WINDOW_NORMAL);
     }
+    // max_frames > 0 时，收满这么多帧就自己 ros::shutdown()。
+    // 没有它，mode 1 会在 ros::spin() 里永远转下去，只能靠外面的 timeout 砍，
+    // 而砍掉的进程跑不到 printStats —— 累计统计根本出不来（CI Run #8 就是这样）。
+    const int max_frames = local_nh.param<int>("max_frames", 0);
+    int n_frames = 0;
     image_transport::ImageTransport it(local_nh);
-    auto callback = [feature_tracker, lk_tracker, descriptor](const sensor_msgs::ImageConstPtr &msg) {
+    auto callback = [feature_tracker, lk_tracker, descriptor, max_frames, &n_frames](const sensor_msgs::ImageConstPtr &msg) {
+      if (max_frames > 0 && n_frames >= max_frames) {
+        return;
+      }
       if (descriptor == "LK") {
         lkImageCallback(msg, lk_tracker);
       } else {
         imageCallback(msg, feature_tracker);
+      }
+      ++n_frames;
+      if (max_frames > 0 && n_frames >= max_frames) {
+        ROS_INFO("Collected %d frames (max_frames), shutting down to print stats",
+                 n_frames);
+        ros::shutdown();
       }
     };
     image_transport::Subscriber sub = it.subscribe("/images_topic", 100, callback);

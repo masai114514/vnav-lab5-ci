@@ -81,6 +81,63 @@ need_bin() {
   return 0
 }
 
+# 自己起一个 master，而不是让 roslaunch 起。
+#
+# 为什么不用 roslaunch（Run #8 实测）：
+#   节点明明 3.5 s 就跑完、图也落盘、统计也打了，roslaunch 却在节点退出后又干等
+#   ~115 s，最后被 `timeout -s INT 120` 砍掉，退出码 124 → 四个描述子全被判 FAIL，
+#   白烧 8 分钟。原因在 roslaunch 自己的收尾（关 rosout/master 那段），跟我们的
+#   节点无关。改成 roscore + rosrun：节点一退出 rosrun 立刻返回，没有可挂的东西。
+MASTER_PID=""
+start_master() {
+  if rosnode list >/dev/null 2>&1; then
+    return 0
+  fi
+  : > "$OUT/roscore.log"
+  roscore >> "$OUT/roscore.log" 2>&1 &
+  MASTER_PID=$!
+  local i
+  for i in $(seq 1 60); do
+    if rosnode list >/dev/null 2>&1; then
+      say "roscore 就绪（pid=$MASTER_PID）"
+      return 0
+    fi
+    sleep 0.5
+  done
+  warn "roscore 30 s 没起来 —— 见 out/roscore.log"
+  tail -20 "$OUT/roscore.log" || true
+  return 1
+}
+
+stop_master() {
+  [ -n "${MASTER_PID:-}" ] || return 0
+  kill -INT "$MASTER_PID" 2>/dev/null || true
+  sleep 1
+  kill -KILL "$MASTER_PID" 2>/dev/null || true
+  wait "$MASTER_PID" 2>/dev/null || true
+  MASTER_PID=""
+}
+
+# 等一个后台节点退出，最多 $2 秒；超时就 SIGINT，再不退就 KILL。
+# 绝不用裸 `wait`：那是在等一个可能永不退出的进程（Run #2 挂过 37 分钟）。
+wait_node() {
+  local pid="$1" limit="${2:-60}" i
+  for i in $(seq 1 "$limit"); do
+    kill -0 "$pid" 2>/dev/null || return 0
+    sleep 1
+  done
+  warn "节点 ${limit}s 没退出，SIGINT"
+  kill -INT "$pid" 2>/dev/null || true
+  for i in $(seq 1 30); do
+    kill -0 "$pid" 2>/dev/null || return 0
+    sleep 1
+  done
+  warn "SIGINT 也不退，KILL"
+  kill -KILL "$pid" 2>/dev/null || true
+  wait "$pid" 2>/dev/null || true
+  return 1
+}
+
 # =============================================================================
 # S1 环境信息
 # =============================================================================
@@ -391,17 +448,28 @@ s_pair() {
   need_bin "$WS_MAIN/devel/lib/lab_5/track_features" || return 1
 
   local desc rc bad=0
+  local figdir="$OUT/fig/pair"
+  mkdir -p "$figdir"
+  # 图像对是 mode 0：跑完 trackFeatures 就 printStats 然后 return，节点自己退出。
+  # 所以这里不用 roslaunch（见 start_master 上面的注释），改 roscore + rosrun，
+  # 退出码就是节点的退出码，不会再有「跑完了却被判超时」。
+  start_master || return 1
   for desc in ${PAIR_DESCRIPTORS:-SIFT SURF ORB FAST}; do
     banner "图像对：descriptor:=$desc"
-    # mode 0 跑完自己退出（interactive:=false 不阻塞）；120 s 只是兜底
     rc=0
-    timeout -s INT 120 roslaunch lab_5 two_frames_tracking.launch \
-      descriptor:="$desc" \
-      output_dir:="$OUT/fig" \
-      interactive:=false \
+    timeout -s INT 120 rosrun lab_5 track_features \
+      _mode:=0 \
+      _descriptor:="$desc" \
+      _img1_path:="$WS_MAIN/src/lab_5/images/box.png" \
+      _img2_path:="$WS_MAIN/src/lab_5/images/box_in_scene.png" \
+      _output_dir:="$figdir" \
+      _interactive:=false \
       2>&1 | tee "$OUT/pair_${desc}.log" || rc=$?
     if [ "$rc" -eq 124 ] || [ "$rc" -eq 130 ]; then
-      warn "$desc 超时（120 s）—— 多半是 interactive 没生效或 roslaunch 挂住了"
+      warn "$desc 超时（120 s）—— 节点没在 2 分钟内退出"
+      bad=1
+    elif [ "$rc" -ne 0 ]; then
+      warn "$desc 退出码 $rc"
       bad=1
     fi
     echo "-------- 统计表（官方格式）--------"
@@ -416,7 +484,8 @@ s_pair() {
       warn "$desc 报 nonfree 错误：OpenCV 没开 OPENCV_ENABLE_NONFREE"
     fi
   done
-  ls -la "$OUT/fig" || true
+  stop_master
+  ls -la "$figdir" || true
   return "$bad"
 }
 
@@ -450,30 +519,49 @@ s_video() {
     return 1
   fi
 
-  local desc bad=0
+  local desc bad=0 node_pid
+  local figdir="$OUT/fig/video"
+  mkdir -p "$figdir"
+  # bag 里到底有多少帧图像 —— 用它当 max_frames，节点收满就自己 shutdown +
+  # printStats。不这么干，mode 1 的 ros::spin() 永远不返回，只能靠外部 timeout
+  # 砍，被砍掉的进程跑不到 printStats，累计统计永远为空（Run #8：LK 有 114 个样本
+  # 但被判 FAIL，SIFT/ORB 干脆一个数都没有）。
+  local nframes
+  nframes=$(awk '/tesse\/left_cam\/rgb\/image_raw/ {print $2; exit}' "$OUT/bag_info.txt")
+  [ -n "$nframes" ] || nframes=120
+  say "bag 里图像帧数 = $nframes"
+
+  start_master || return 1
   for desc in ${VIDEO_DESCRIPTORS:-LK SIFT ORB}; do
-    banner "视频序列：descriptor:=$desc"
-    # 20 s 的 bag，留足余量；到时用 SIGINT 结束，好让节点跑到 printStats
-    rc=0
-    timeout -s INT 120 roslaunch lab_5 video_tracking.launch \
-      path_to_dataset:="$OUT/seq20s.bag" \
-      descriptor:="$desc" \
-      output_dir:="$OUT/fig" \
-      interactive:=false \
-      lk_save_every:=10 \
-      2>&1 | tee "$OUT/video_${desc}.log" || rc=$?
-    if [ "$rc" -eq 124 ] || [ "$rc" -eq 130 ]; then
-      warn "$desc 超时（120 s）"
-    fi
+    banner "视频序列：descriptor:=$desc（max_frames=$nframes）"
+    rosrun lab_5 track_features \
+      _mode:=1 \
+      _descriptor:="$desc" \
+      _output_dir:="$figdir" \
+      _interactive:=false \
+      _lk_save_every:=10 \
+      _max_frames:="$nframes" \
+      /images_topic:=/camera/color/image_raw \
+      > "$OUT/video_${desc}.log" 2>&1 &
+    node_pid=$!
+    # 等 image_transport 把订阅建起来，否则前几帧会被丢掉
+    sleep 3
+    # -r 4：20 s 的 bag 5 s 放完，后面全是节点自己的处理时间（不再受播放速度限制）
+    timeout -s INT 200 rosbag play --clock -r 4 "$OUT/seq20s.bag" \
+      /tesse/left_cam/rgb/image_raw:=/camera/color/image_raw \
+      >> "$OUT/video_${desc}.log" 2>&1 || true
+    wait_node "$node_pid" 300 || true
     echo "-------- 视频累计统计 --------"
     if grep -E 'Avg\.|Num\. of samples' "$OUT/video_${desc}.log"; then
       :
     else
       warn "$desc 视频模式没有打出统计"
+      tail -15 "$OUT/video_${desc}.log" || true
       bad=1
     fi
   done
-  ls -la "$OUT/fig" | head -40 || true
+  stop_master
+  ls -la "$figdir" | head -40 || true
   return "$bad"
 }
 
@@ -495,39 +583,36 @@ s_flow() {
   # self_flow 没有官方 launch，直接 rosrun + remap。
   # ⚠️ 这里每一步都必须有硬超时：Run #2 里这一步整整挂了 37 分钟，
   #    一直挂到 job 的 75 分钟上限被 GitHub 取消（连带 OpenCV 缓存也没存成）。
+  # ⚠️ Run #8 的教训：这一段以前**没有起 master**，`rosrun self_flow` 和
+  # `rosbag play` 只能对着 localhost:11311 空等 120 s / 150 s（日志里是
+  # "Failed to contact master ... Retrying"），于是一张光流图都没有。
+  local figdir="$OUT/fig/flow"
+  mkdir -p "$figdir"
+  start_master || return 1
+
   rm -f "$OUT/self_flow.log"
-  timeout -s INT 120 rosrun lab_5 self_flow \
+  rosrun lab_5 self_flow \
       /images_topic:=/camera/color/image_raw \
       _interactive:=false \
-      _output_dir:="$OUT/fig" \
+      _output_dir:="$figdir" \
       > "$OUT/self_flow.log" 2>&1 &
   local node_pid=$!
+  sleep 3
 
   local rc=0
-  timeout -s INT 150 rosbag play --clock -r 2 "$OUT/seq20s.bag" \
+  timeout -s INT 150 rosbag play --clock -r 4 "$OUT/seq20s.bag" \
     /tesse/left_cam/rgb/image_raw:=/camera/color/image_raw \
     > "$OUT/rosbag_play_flow.log" 2>&1 || rc=$?
   tail -5 "$OUT/rosbag_play_flow.log" || true
 
-  # 给节点留 3 s 收尾（写最后一张图），然后最多等 20 s 让它自然退出，
-  # 不退出就 KILL —— 绝不再出现「wait 等一个不响应的进程」。
-  sleep 3
-  local i
-  for i in $(seq 1 20); do
-    kill -0 "$node_pid" 2>/dev/null || break
-    sleep 1
-  done
-  if kill -0 "$node_pid" 2>/dev/null; then
-    warn "self_flow 20 s 内没退出，强制结束"
-    kill -INT "$node_pid" 2>/dev/null || true
-    sleep 2
-    kill -KILL "$node_pid" 2>/dev/null || true
-  fi
-  wait "$node_pid" 2>/dev/null || true
-
+  # 给节点留 5 s 把最后一张图写完，然后最多等 30 s；不退就 SIGINT / KILL。
+  # 绝不用裸 `wait`（Run #2 在这里挂过 37 分钟）。
+  sleep 5
+  wait_node "$node_pid" 30 || true
+  stop_master
   grep -E 'Saved figure|ERROR|error' "$OUT/self_flow.log" | head -10 || true
-  if ls "$OUT/fig" | grep -qi flow; then
-    ls -la "$OUT/fig" | grep -i flow
+  if ls "$figdir" 2>/dev/null | grep -qi flow; then
+    ls -la "$figdir" | grep -i flow
     return 0
   fi
   warn "没有稠密光流图（rosbag play rc=$rc）"

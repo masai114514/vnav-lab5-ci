@@ -1,0 +1,8 @@
+
+------------------------------------------------------------------------
+## D8：Farneback 稠密光流
+
+------------------------------------------------------------------------
+[31m[ERROR] [1792754571.658414038]: [registerPublisher] Failed to contact master at [localhost:11311].  Retrying...[0m
+[31m[ERROR] [1792754571.589362561]: [setParam] Failed to contact master at [localhost:11311].  Retrying...[0m
+[1;33m[ci][0m 没有稠密光流图（rosbag play rc=124）

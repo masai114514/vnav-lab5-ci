@@ -92,9 +92,18 @@ def table_row(name, st, note=None):
 
 
 def find_figs(figdir: str) -> list:
+    """递归找图：pair / video / flow 三个 stage 现在各写各的子目录
+    （out/fig/pair、out/fig/video、out/fig/flow）。以前三个 stage 共用一个
+    out/fig，视频阶段会把图像对阶段的 sift_matches_*.png 直接覆盖掉。"""
     if not os.path.isdir(figdir):
         return []
-    return sorted(f for f in os.listdir(figdir) if f.lower().endswith(".png"))
+    out = []
+    for root, _, files in os.walk(figdir):
+        for f in files:
+            if f.lower().endswith(".png"):
+                full = os.path.join(root, f)
+                out.append(os.path.relpath(full, figdir))
+    return sorted(out)
 
 
 def main() -> int:
