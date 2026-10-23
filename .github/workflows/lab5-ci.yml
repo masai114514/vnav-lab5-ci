@@ -80,11 +80,12 @@ jobs:
     # 首次（无缓存）OpenCV 3.4.2 编译 + 全部测试 ≈ 45 分钟，留足余量
     timeout-minutes: 75
 
-    env:
-      # 缓存 key 只在这一处定义，restore / 删除旧条目 / save 三处共用，
-      # 免得手抄不一致。v2 是因为 v1 里被塞进过一个 120 KB 的半成品
-      # （Run #3 被 concurrency 取消时存的），见 ci/lab5_ci.sh 的 deps_ready 注释。
-      CACHE_KEY: deps-melodic-nonfree-v2-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
+    # ⚠️ 缓存 key 不要提到 job 级 env 里：`hashFiles()` 在 job 级 env 是**非法表达式**
+    #    （实测 push 后 GitHub 直接判 workflow 无效，报
+    #     "Unrecognized function: 'hashFiles'"，整个 run 秒失败）。
+    #    它只能出现在 step 级的 env / with / if 里，所以下面三处各自写一遍，
+    #    改的时候记得同步。v2 是因为 v1 里被塞进过一个 120 KB 的半成品
+    #    （Run #3 被 concurrency 取消时存的），见 ci/lab5_ci.sh 的 deps_ready 注释。
 
     steps:
       - uses: actions/checkout@v4
@@ -104,7 +105,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ws_deps/install
-          key: ${{ env.CACHE_KEY }}
+          key: deps-melodic-nonfree-v2-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
           restore-keys: |
             deps-melodic-nonfree-v2-
 
@@ -183,6 +184,8 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 必须写成 step 级 env（job 级 env 里 hashFiles 非法，见上）
+          CACHE_KEY: deps-melodic-nonfree-v2-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
         run: |
           ids=$(gh api "repos/$GITHUB_REPOSITORY/actions/caches?key=$CACHE_KEY" \
                   --jq '.actions_caches[].id' 2>/dev/null || true)
@@ -196,7 +199,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: ws_deps/install
-          key: ${{ env.CACHE_KEY }}
+          key: deps-melodic-nonfree-v2-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
 
       - name: 上传产物
         if: always()
