@@ -1,0 +1,486 @@
+vCPU     = 4
+内存     = 15988 MB
+PRETTY_NAME="Ubuntu 18.04.6 LTS"
+VERSION_CODENAME=bionic
+ROOT     = /home/runner/work/vnav-lab5-ci/vnav-lab5-ci
+catkin   = (没有 catkin_tools)
+cmake    = cmake version 3.10.2
+gcc      = 7
+--- 已装的 ROS 包数: 81
+[1;36m[ci][0m 发行版代号 = bionic
+[1;36m[ci][0m apt update OK
+Setting up x11proto-fixes-dev (1:2018.4-4) ...
+Setting up libxau-dev:amd64 (1:1.0.8-1ubuntu1) ...
+Setting up libxcb1-dev:amd64 (1.13-2~ubuntu18.04) ...
+Setting up libx11-dev:amd64 (2:1.6.4-3ubuntu0.4) ...
+Setting up libxfixes-dev:amd64 (1:5.0.3-1) ...
+Setting up libxcb-shm0-dev:amd64 (1.13-2~ubuntu18.04) ...
+Setting up libxdamage-dev:amd64 (1:1.1.4-3) ...
+Setting up libxrender-dev:amd64 (1:0.9.10-1) ...
+Setting up libxcb-render0-dev:amd64 (1.13-2~ubuntu18.04) ...
+Setting up libxft-dev (2.3.2-1) ...
+Setting up libgdk-pixbuf2.0-dev (2.36.11-2) ...
+Setting up libxext-dev:amd64 (2:1.3.3-1) ...
+Setting up libxinerama-dev:amd64 (2:1.1.3-1) ...
+Setting up libxi-dev:amd64 (2:1.7.9-1) ...
+Setting up libxcursor-dev:amd64 (1:1.1.15-1) ...
+Setting up libxrandr-dev:amd64 (2:1.5.1-1) ...
+Setting up libcairo2-dev:amd64 (1.15.10-2ubuntu0.1) ...
+Setting up libxcomposite-dev:amd64 (1:0.4.4-2) ...
+Setting up libpango1.0-dev (1.40.14-1ubuntu0.1) ...
+Setting up libgtk2.0-dev (2.24.32-1ubuntu1) ...
+[1;36m[ci][0m ---------- 关键依赖版本 ----------
+Python 2.7.17
+catkin_tools 0.6.1 (C) 2014-2026 Open Source Robotics Foundation
+catkin_tools is released under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+cv_bridge 头文件: 有
+[1;36m[ci][0m deps 缓存命中（/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install 已就绪），跳过 OpenCV 编译
+109M	/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+  已缓存 libopencv*.so : 75 个
+Cloning into '/tmp/vision_opencv'...
+NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
+--------------------------------------------------------------------------------
+Profile:                     default
+Extending:        [explicit] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main
+--------------------------------------------------------------------------------
+Build Space:       [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/build
+Devel Space:       [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel
+Install Space:      [unused] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/install
+Log Space:         [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/logs
+Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src
+DESTDIR:            [unused] None
+--------------------------------------------------------------------------------
+Devel Space Layout:          linked
+Install Space Layout:        None
+--------------------------------------------------------------------------------
+Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
+Additional Make Args:        None
+Additional catkin Make Args: None
+Internal Make Job Server:    True
+Cache Job Environments:      False
+--------------------------------------------------------------------------------
+Whitelisted Packages:        None
+Blacklisted Packages:        None
+--------------------------------------------------------------------------------
+Workspace configuration appears valid.
+
+Initialized new catkin workspace in `/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main`
+--------------------------------------------------------------------------------
+NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
+--------------------------------------------------------------------------------
+Profile:                     default
+Extending:        [explicit] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main
+--------------------------------------------------------------------------------
+Build Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/build
+Devel Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel
+Install Space:      [unused] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/install
+Log Space:         [missing] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/logs
+Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src
+DESTDIR:            [unused] None
+--------------------------------------------------------------------------------
+Devel Space Layout:          linked
+Install Space Layout:        None
+--------------------------------------------------------------------------------
+Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
+Additional Make Args:        -j4
+Additional catkin Make Args: None
+Internal Make Job Server:    True
+Cache Job Environments:      False
+--------------------------------------------------------------------------------
+Whitelisted Packages:        None
+Blacklisted Packages:        None
+--------------------------------------------------------------------------------
+Workspace configuration appears valid.
+
+NOTE: Forcing CMake to run for each package.
+--------------------------------------------------------------------------------
+[build] Found '3' packages in 0.0 seconds.                                     
+[build] Updating package table.                                                
+Starting >>> catkin_tools_prebuild               
+Finished <<< catkin_tools_prebuild                [ 2.1 seconds ]
+Starting >>> cv_bridge                           
+Finished <<< cv_bridge                            [ 9.9 seconds ]
+[build] Summary: All 2 packages succeeded!
+[build] Ignored: 2 packages were skipped or are blacklisted.
+[build] Warnings: None.
+[build] Abandoned: No packages were abandoned.
+[build] Failed: No packages failed.
+[build] Runtime: 12.0 seconds total.
+[build] Note: Workspace packages have changed, please re-source setup files to use them.
+NOTICE: Could not determine the width of the terminal. A default width of 80 will be used. This warning will only be printed once.
+--------------------------------------------------------------------------------
+Profile:                     default
+Extending:        [explicit] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+Workspace:                   /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main
+--------------------------------------------------------------------------------
+Build Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/build
+Devel Space:        [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel
+Install Space:      [unused] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/install
+Log Space:          [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/logs
+Source Space:       [exists] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src
+DESTDIR:            [unused] None
+--------------------------------------------------------------------------------
+Devel Space Layout:          linked
+Install Space Layout:        None
+--------------------------------------------------------------------------------
+Additional CMake Args:       -DCMAKE_BUILD_TYPE=Release
+Additional Make Args:        -j4
+Additional catkin Make Args: None
+Internal Make Job Server:    True
+Cache Job Environments:      False
+--------------------------------------------------------------------------------
+Whitelisted Packages:        None
+Blacklisted Packages:        None
+--------------------------------------------------------------------------------
+Workspace configuration appears valid.
+--------------------------------------------------------------------------------
+[build] Found '3' packages in 0.0 seconds.                                     
+[build] Updating package table.                                                
+Starting >>> ci_tools                
+Starting >>> cv_bridge               
+Finished <<< cv_bridge                [ 0.4 seconds ]
+Starting >>> lab_5                   
+Finished <<< ci_tools                 [ 8.6 seconds ]
+Finished <<< lab_5                    [ 9.6 seconds ]
+
+[build] Successful packages:
+
+ [Successful] ci_tools 
+ [Successful] cv_bridge
+ [Successful] lab_5    
+
+[build] Summary: All 3 packages succeeded!
+[build] Ignored: None.
+[build] Warnings: None.
+[build] Abandoned: No packages were abandoned.
+[build] Failed: No packages failed.
+[build] Runtime: 10.1 seconds total.
+[build] Note: Workspace packages have changed, please re-source setup files to use them.
+[1;36m[ci][0m ---------- 编出来的可执行文件 ----------
+total 16
+drwxr-xr-x 2 root root 4096 Oct 23 11:49 .
+drwxr-xr-x 7 root root 4096 Oct 23 11:49 ..
+lrwxrwxrwx 1 root root   92 Oct 23 11:49 self_flow -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/self_flow
+lrwxrwxrwx 1 root root   97 Oct 23 11:49 track_features -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/track_features
+total 12
+drwxr-xr-x 2 root root 4096 Oct 23 11:49 .
+drwxr-xr-x 7 root root 4096 Oct 23 11:49 ..
+lrwxrwxrwx 1 root root   99 Oct 23 11:49 mp4_to_bag -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/ci_tools/lib/ci_tools/mp4_to_bag
+# catkin build 证据
+
+## 编译环境
+- ROS: melodic
+- gcc: 7
+- OpenCV: #define CV_VERSION_MAJOR    3
+
+## lab_5 产物
+total 16
+drwxr-xr-x 2 root root 4096 Oct 23 11:49 .
+drwxr-xr-x 7 root root 4096 Oct 23 11:49 ..
+lrwxrwxrwx 1 root root   92 Oct 23 11:49 self_flow -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/self_flow
+lrwxrwxrwx 1 root root   97 Oct 23 11:49 track_features -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/devel/.private/lab_5/lib/lab_5/track_features
+
+## OpenCV 版本（运行时实际链接到的那一份）
+	libopencv_core.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_core.so.3.4 (0x00007fa1df400000)
+	libopencv_highgui.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_highgui.so.3.4 (0x00007fa1df000000)
+	libopencv_imgcodecs.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgcodecs.so.3.4 (0x00007fa1de800000)
+	libopencv_calib3d.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_calib3d.so.3.4 (0x00007fa1dc800000)
+	libopencv_features2d.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_features2d.so.3.4 (0x00007fa1dc400000)
+	libopencv_flann.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_flann.so.3.4 (0x00007fa1dc000000)
+	libopencv_imgproc.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgproc.so.3.4 (0x00007fa1d9600000)
+	libopencv_video.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_video.so.3.4 (0x00007fa1d9000000)
+
+## cv_bridge 链接到的 OpenCV
+	libopencv_imgcodecs.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgcodecs.so.3.4 (0x00007f2d3b800000)
+	libopencv_imgproc.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_imgproc.so.3.4 (0x00007f2d38c00000)
+	libopencv_core.so.3.4 => /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install/lib/libopencv_core.so.3.4 (0x00007f2d37c00000)
+[1;36m[ci][0m roscore 就绪（pid=4866）
+
+------------------------------------------------------------------------
+## 图像对：descriptor:=SIFT
+
+------------------------------------------------------------------------
+[0m[ INFO] [1792756166.967166015]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
+[0m[ INFO] [1792756166.968069527]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
+[0m[ INFO] [1792756167.034062411]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_keypoints_img1.png[0m
+[0m[ INFO] [1792756167.043189311]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_keypoints_img2.png[0m
+[0m[ INFO] [1792756167.134307846]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_matches_all_knn.png[0m
+[0m[ INFO] [1792756167.149547144]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_matches_good_lowe.png[0m
+[0m[ INFO] [1792756167.168065375]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/sift_matches_inliers_outliers.png[0m
+Avg. Keypoints 1 Size: 603
+Avg. Keypoints 2 Size: 969
+Avg. Number of matches: 603
+Avg. Number of good matches: 98
+Avg. Number of Inliers: 76
+Avg. Inliers ratio: 0.77551
+Num. of samples: 1
+-------- 统计表（官方格式）--------
+Avg. Keypoints 1 Size: 603
+Avg. Keypoints 2 Size: 969
+Avg. Number of matches: 603
+Avg. Number of good matches: 98
+Avg. Number of Inliers: 76
+Avg. Inliers ratio: 0.77551
+Num. of samples: 1
+
+------------------------------------------------------------------------
+## 图像对：descriptor:=SURF
+
+------------------------------------------------------------------------
+[0m[ INFO] [1792756167.635692048]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
+[0m[ INFO] [1792756167.636590070]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
+[0m[ INFO] [1792756167.709334530]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_keypoints_img1.png[0m
+[0m[ INFO] [1792756167.719017906]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_keypoints_img2.png[0m
+[0m[ INFO] [1792756167.858699059]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_matches_all_knn.png[0m
+[0m[ INFO] [1792756167.874475950]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_matches_good_lowe.png[0m
+[0m[ INFO] [1792756167.896082841]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/surf_matches_inliers_outliers.png[0m
+Avg. Keypoints 1 Size: 997
+Avg. Keypoints 2 Size: 1822
+Avg. Number of matches: 997
+Avg. Number of good matches: 138
+Avg. Number of Inliers: 91
+Avg. Inliers ratio: 0.65942
+Num. of samples: 1
+-------- 统计表（官方格式）--------
+Avg. Keypoints 1 Size: 997
+Avg. Keypoints 2 Size: 1822
+Avg. Number of matches: 997
+Avg. Number of good matches: 138
+Avg. Number of Inliers: 91
+Avg. Inliers ratio: 0.65942
+Num. of samples: 1
+
+------------------------------------------------------------------------
+## 图像对：descriptor:=ORB
+
+------------------------------------------------------------------------
+[0m[ INFO] [1792756168.224264896]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
+[0m[ INFO] [1792756168.225127672]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
+[0m[ INFO] [1792756168.245106713]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_keypoints_img1.png[0m
+[0m[ INFO] [1792756168.254478949]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_keypoints_img2.png[0m
+[0m[ INFO] [1792756168.296013124]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_all_knn.png[0m
+[0m[ INFO] [1792756168.309820975]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_good_lowe.png[0m
+[0m[ INFO] [1792756168.328687144]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_inliers_outliers.png[0m
+Avg. Keypoints 1 Size: 500
+Avg. Keypoints 2 Size: 500
+Avg. Number of matches: 500
+Avg. Number of good matches: 13
+Avg. Number of Inliers: 7
+Avg. Inliers ratio: 0.538462
+Num. of samples: 1
+-------- 统计表（官方格式）--------
+Avg. Keypoints 1 Size: 500
+Avg. Keypoints 2 Size: 500
+Avg. Number of matches: 500
+Avg. Number of good matches: 13
+Avg. Number of Inliers: 7
+Avg. Inliers ratio: 0.538462
+Num. of samples: 1
+
+------------------------------------------------------------------------
+## 图像对：descriptor:=FAST
+
+------------------------------------------------------------------------
+[0m[ INFO] [1792756168.724063991]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
+[0m[ INFO] [1792756168.724941244]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
+[0m[ INFO] [1792756168.746511136]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_keypoints_img1.png[0m
+[0m[ INFO] [1792756168.755715980]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_keypoints_img2.png[0m
+[0m[ INFO] [1792756169.204497078]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_matches_all_knn.png[0m
+[0m[ INFO] [1792756169.218700458]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_matches_good_lowe.png[0m
+[0m[ INFO] [1792756169.250644872]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/fast_brief_matches_inliers_outliers.png[0m
+Avg. Keypoints 1 Size: 2266
+Avg. Keypoints 2 Size: 3653
+Avg. Number of matches: 2266
+Avg. Number of good matches: 41
+Avg. Number of Inliers: 17
+Avg. Inliers ratio: 0.414634
+Num. of samples: 1
+-------- 统计表（官方格式）--------
+Avg. Keypoints 1 Size: 2266
+Avg. Keypoints 2 Size: 3653
+Avg. Number of matches: 2266
+Avg. Number of good matches: 41
+Avg. Number of Inliers: 17
+Avg. Inliers ratio: 0.414634
+Num. of samples: 1
+total 9156
+drwxr-xr-x 2 root root   4096 Oct 23 11:49 .
+drwxr-xr-x 3 root root   4096 Oct 23 11:49 ..
+-rw-r--r-- 1 root root 178225 Oct 23 11:49 fast_brief_keypoints_img1.png
+-rw-r--r-- 1 root root 431511 Oct 23 11:49 fast_brief_keypoints_img2.png
+-rw-r--r-- 1 root root 585856 Oct 23 11:49 fast_brief_matches_all_knn.png
+-rw-r--r-- 1 root root 540520 Oct 23 11:49 fast_brief_matches_good_lowe.png
+-rw-r--r-- 1 root root 573381 Oct 23 11:49 fast_brief_matches_inliers_outliers.png
+-rw-r--r-- 1 root root 168359 Oct 23 11:49 orb_keypoints_img1.png
+-rw-r--r-- 1 root root 406114 Oct 23 11:49 orb_keypoints_img2.png
+-rw-r--r-- 1 root root 574660 Oct 23 11:49 orb_matches_all_knn.png
+-rw-r--r-- 1 root root 532126 Oct 23 11:49 orb_matches_good_lowe.png
+-rw-r--r-- 1 root root 544585 Oct 23 11:49 orb_matches_inliers_outliers.png
+-rw-r--r-- 1 root root 162330 Oct 23 11:49 sift_keypoints_img1.png
+-rw-r--r-- 1 root root 391952 Oct 23 11:49 sift_keypoints_img2.png
+-rw-r--r-- 1 root root 625573 Oct 23 11:49 sift_matches_all_knn.png
+-rw-r--r-- 1 root root 553980 Oct 23 11:49 sift_matches_good_lowe.png
+-rw-r--r-- 1 root root 581513 Oct 23 11:49 sift_matches_inliers_outliers.png
+-rw-r--r-- 1 root root 190603 Oct 23 11:49 surf_keypoints_img1.png
+-rw-r--r-- 1 root root 495034 Oct 23 11:49 surf_keypoints_img2.png
+-rw-r--r-- 1 root root 615138 Oct 23 11:49 surf_matches_all_knn.png
+-rw-r--r-- 1 root root 560290 Oct 23 11:49 surf_matches_good_lowe.png
+-rw-r--r-- 1 root root 620254 Oct 23 11:49 surf_matches_inliers_outliers.png
+
+------------------------------------------------------------------------
+## mp4 -> rosbag
+
+------------------------------------------------------------------------
+[mp4_to_bag] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/data/seq20s.mp4 -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
+             120 帧 320x200 @ 6.00 fps, 时长 20.00 s
+             topic=/tesse/left_cam/rgb/image_raw  (另写 /clock)
+path:        /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
+version:     2.0
+duration:    19.8s
+start:       Jan 01 1970 00:00:01.00 (1.00)
+end:         Jan 01 1970 00:00:20.83 (20.83)
+size:        22.0 MB
+messages:    240
+compression: none [25/25 chunks]
+types:       rosgraph_msgs/Clock [a9c97c1d230cfc112e270351a944ee47]
+             sensor_msgs/Image   [060021388200f6f0f447d0fcd9c64743]
+topics:      /clock                          120 msgs    : rosgraph_msgs/Clock
+             /tesse/left_cam/rgb/image_raw   120 msgs    : sensor_msgs/Image
+[1;36m[ci][0m bag 里图像帧数 = 120
+[1;36m[ci][0m roscore 就绪（pid=5130）
+
+------------------------------------------------------------------------
+## 视频序列：descriptor:=LK（max_frames=120, idle_timeout=10 s）
+
+------------------------------------------------------------------------
+-------- 视频累计统计 --------
+Avg. Keypoints 1 Size: 71.6316
+Avg. Keypoints 2 Size: 64.1053
+Avg. Number of matches: 64.1053
+Avg. Number of good matches: 64.1053
+Avg. Number of Inliers: 44.1491
+Avg. Inliers ratio: 0.714499
+Num. of samples: 114
+
+------------------------------------------------------------------------
+## 视频序列：descriptor:=SIFT（max_frames=120, idle_timeout=10 s）
+
+------------------------------------------------------------------------
+ci/lab5_ci.sh: line 535:  5234 Segmentation fault      (core dumped) stdbuf -oL -eL rosrun lab_5 track_features _mode:=1 _descriptor:="$desc" _output_dir:="$figdir" _interactive:=false _lk_save_every:=10 _max_frames:="$nframes" _idle_timeout:=10.0 /images_topic:=/camera/color/image_raw > "$nlog" 2>&1
+-------- 视频累计统计 --------
+[1;33m[ci][0m SIFT 视频模式没有打出统计
+[0m[ INFO] [1792756196.125212072]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/sift_matches_inliers_outliers.png[0m
+
+------------------------------------------------------------------------
+## 视频序列：descriptor:=ORB（max_frames=120, idle_timeout=10 s）
+
+------------------------------------------------------------------------
+ci/lab5_ci.sh: line 535:  5283 Segmentation fault      (core dumped) stdbuf -oL -eL rosrun lab_5 track_features _mode:=1 _descriptor:="$desc" _output_dir:="$figdir" _interactive:=false _lk_save_every:=10 _max_frames:="$nframes" _idle_timeout:=10.0 /images_topic:=/camera/color/image_raw > "$nlog" 2>&1
+-------- 视频累计统计 --------
+[1;33m[ci][0m ORB 视频模式没有打出统计
+[0m[ INFO] [1792756204.792471954]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/orb_matches_inliers_outliers.png[0m
+total 1380
+drwxr-xr-x 2 root root   4096 Oct 23 11:50 .
+drwxr-xr-x 4 root root   4096 Oct 23 11:49 ..
+-rw-r--r-- 1 root root  89033 Oct 23 11:49 lk_tracks_0000.png
+-rw-r--r-- 1 root root  92989 Oct 23 11:49 lk_tracks_0010.png
+-rw-r--r-- 1 root root  98390 Oct 23 11:49 lk_tracks_0020.png
+-rw-r--r-- 1 root root  90035 Oct 23 11:49 lk_tracks_0030.png
+-rw-r--r-- 1 root root  93460 Oct 23 11:49 lk_tracks_0040.png
+-rw-r--r-- 1 root root  83114 Oct 23 11:49 lk_tracks_0050.png
+-rw-r--r-- 1 root root  97147 Oct 23 11:49 lk_tracks_0060.png
+-rw-r--r-- 1 root root  83517 Oct 23 11:49 lk_tracks_0070.png
+-rw-r--r-- 1 root root  83344 Oct 23 11:49 lk_tracks_0080.png
+-rw-r--r-- 1 root root 103312 Oct 23 11:49 lk_tracks_0090.png
+-rw-r--r-- 1 root root  92549 Oct 23 11:49 lk_tracks_0100.png
+-rw-r--r-- 1 root root 106718 Oct 23 11:49 lk_tracks_0110.png
+-rw-r--r-- 1 root root 129951 Oct 23 11:50 orb_matches_inliers_outliers.png
+-rw-r--r-- 1 root root 132020 Oct 23 11:49 sift_matches_inliers_outliers.png
+
+------------------------------------------------------------------------
+## D8：Farneback 稠密光流
+
+------------------------------------------------------------------------
+[1;36m[ci][0m roscore 就绪（pid=5421）
+Waiting 0.2 seconds after advertising topics... done.
+
+Hit space to toggle paused, or 's' to step.
+ [RUNNING]  Bag Time:      1.000000   Duration: 0.000000 / 19.833333                [RUNNING]  Bag Time:      1.161611   Duration: 0.161611 / 19.833333                [RUNNING]  Bag Time:      1.322743   Duration: 0.322743 / 19.833333                [RUNNING]  Bag Time:      1.483974   Duration: 0.483974 / 19.833333                [RUNNING]  Bag Time:      1.645183   Duration: 0.645183 / 19.833333                [RUNNING]  Bag Time:      1.806574   Duration: 0.806574 / 19.833333                [RUNNING]  Bag Time:      1.967865   Duration: 0.967865 / 19.833333                [RUNNING]  Bag Time:      2.129042   Duration: 1.129042 / 19.833333                [RUNNING]  Bag Time:      2.330715   Duration: 1.330715 / 19.833333                [RUNNING]  Bag Time:      2.491935   Duration: 1.491935 / 19.833333                [RUNNING]  Bag Time:      2.653081   Duration: 1.653081 / 19.833333                [RUNNING]  Bag Time:      2.814247   Duration: 1.814247 / 19.833333                [RUNNING]  Bag Time:      2.975390   Duration: 1.975390 / 19.833333                [RUNNING]  Bag Time:      3.136533   Duration: 2.136533 / 19.833333                [RUNNING]  Bag Time:      3.297749   Duration: 2.297749 / 19.833333                [RUNNING]  Bag Time:      3.499191   Duration: 2.499191 / 19.833333                [RUNNING]  Bag Time:      3.660520   Duration: 2.660520 / 19.833333                [RUNNING]  Bag Time:      3.821660   Duration: 2.821660 / 19.833333                [RUNNING]  Bag Time:      3.982902   Duration: 2.982902 / 19.833333                [RUNNING]  Bag Time:      4.144088   Duration: 3.144088 / 19.833333                [RUNNING]  Bag Time:      4.305236   Duration: 3.305236 / 19.833333                [RUNNING]  Bag Time:      4.466391   Duration: 3.466391 / 19.833333                [RUNNING]  Bag Time:      4.627168   Duration: 3.627168 / 19.833333                [RUNNING]  Bag Time:      4.828454   Duration: 3.828454 / 19.833333                [RUNNING]  Bag Time:      4.989578   Duration: 3.989578 / 19.833333                [RUNNING]  Bag Time:      5.150750   Duration: 4.150750 / 19.833333                [RUNNING]  Bag Time:      5.311940   Duration: 4.311940 / 19.833333                [RUNNING]  Bag Time:      5.473040   Duration: 4.473040 / 19.833333                [RUNNING]  Bag Time:      5.634247   Duration: 4.634247 / 19.833333                [RUNNING]  Bag Time:      5.795442   Duration: 4.795442 / 19.833333                [RUNNING]  Bag Time:      5.997035   Duration: 4.997035 / 19.833333                [RUNNING]  Bag Time:      6.158277   Duration: 5.158277 / 19.833333                [RUNNING]  Bag Time:      6.319487   Duration: 5.319487 / 19.833333                [RUNNING]  Bag Time:      6.480831   Duration: 5.480831 / 19.833333                [RUNNING]  Bag Time:      6.642030   Duration: 5.642030 / 19.833333                [RUNNING]  Bag Time:      6.803302   Duration: 5.803302 / 19.833333                [RUNNING]  Bag Time:      6.964612   Duration: 5.964612 / 19.833333                [RUNNING]  Bag Time:      7.166128   Duration: 6.166128 / 19.833333                [RUNNING]  Bag Time:      7.327266   Duration: 6.327266 / 19.833333                [RUNNING]  Bag Time:      7.488601   Duration: 6.488601 / 19.833333                [RUNNING]  Bag Time:      7.649822   Duration: 6.649822 / 19.833333                [RUNNING]  Bag Time:      7.811048   Duration: 6.811048 / 19.833333                [RUNNING]  Bag Time:      7.972180   Duration: 6.972180 / 19.833333                [RUNNING]  Bag Time:      8.133314   Duration: 7.133314 / 19.833333                [RUNNING]  Bag Time:      8.294448   Duration: 7.294448 / 19.833333                [RUNNING]  Bag Time:      8.495841   Duration: 7.495841 / 19.833333                [RUNNING]  Bag Time:      8.656960   Duration: 7.656960 / 19.833333                [RUNNING]  Bag Time:      8.818284   Duration: 7.818284 / 19.833333                [RUNNING]  Bag Time:      8.979465   Duration: 7.979465 / 19.833333                [RUNNING]  Bag Time:      9.140674   Duration: 8.140674 / 19.833333                [RUNNING]  Bag Time:      9.301873   Duration: 8.301873 / 19.833333                [RUNNING]  Bag Time:      9.462967   Duration: 8.462967 / 19.833333                [RUNNING]  Bag Time:      9.664268   Duration: 8.664268 / 19.833333                [RUNNING]  Bag Time:      9.825431   Duration: 8.825431 / 19.833333                [RUNNING]  Bag Time:      9.986629   Duration: 8.986629 / 19.833333                [RUNNING]  Bag Time:     10.148033   Duration: 9.148033 / 19.833333                [RUNNING]  Bag Time:     10.309148   Duration: 9.309148 / 19.833333                [RUNNING]  Bag Time:     10.470296   Duration: 9.470296 / 19.833333                [RUNNING]  Bag Time:     10.631494   Duration: 9.631494 / 19.833333                [RUNNING]  Bag Time:     10.832975   Duration: 9.832975 / 19.833333                [RUNNING]  Bag Time:     10.994145   Duration: 9.994145 / 19.833333                [RUNNING]  Bag Time:     11.155338   Duration: 10.155338 / 19.833333                [RUNNING]  Bag Time:     11.316626   Duration: 10.316626 / 19.833333                [RUNNING]  Bag Time:     11.477847   Duration: 10.477847 / 19.833333                [RUNNING]  Bag Time:     11.639059   Duration: 10.639059 / 19.833333                [RUNNING]  Bag Time:     11.800313   Duration: 10.800313 / 19.833333                [RUNNING]  Bag Time:     11.961568   Duration: 10.961568 / 19.833333                [RUNNING]  Bag Time:     12.163039   Duration: 11.163039 / 19.833333                [RUNNING]  Bag Time:     12.324454   Duration: 11.324454 / 19.833333                [RUNNING]  Bag Time:     12.485675   Duration: 11.485675 / 19.833333                [RUNNING]  Bag Time:     12.646872   Duration: 11.646872 / 19.833333                [RUNNING]  Bag Time:     12.808146   Duration: 11.808146 / 19.833333                [RUNNING]  Bag Time:     12.969308   Duration: 11.969308 / 19.833333                [RUNNING]  Bag Time:     13.130568   Duration: 12.130568 / 19.833333                [RUNNING]  Bag Time:     13.332163   Duration: 12.332163 / 19.833333                [RUNNING]  Bag Time:     13.493369   Duration: 12.493369 / 19.833333                [RUNNING]  Bag Time:     13.654687   Duration: 12.654687 / 19.833333                [RUNNING]  Bag Time:     13.815911   Duration: 12.815911 / 19.833333                [RUNNING]  Bag Time:     13.977165   Duration: 12.977165 / 19.833333                [RUNNING]  Bag Time:     14.138356   Duration: 13.138356 / 19.833333                [RUNNING]  Bag Time:     14.299694   Duration: 13.299694 / 19.833333                [RUNNING]  Bag Time:     14.460959   Duration: 13.460959 / 19.833333                [RUNNING]  Bag Time:     14.662488   Duration: 13.662488 / 19.833333                [RUNNING]  Bag Time:     14.823736   Duration: 13.823736 / 19.833333                [RUNNING]  Bag Time:     14.984954   Duration: 13.984954 / 19.833333                [RUNNING]  Bag Time:     15.146286   Duration: 14.146286 / 19.833333                [RUNNING]  Bag Time:     15.307565   Duration: 14.307565 / 19.833333                [RUNNING]  Bag Time:     15.468904   Duration: 14.468904 / 19.833333                [RUNNING]  Bag Time:     15.630203   Duration: 14.630203 / 19.833333                [RUNNING]  Bag Time:     15.831829   Duration: 14.831829 / 19.833333                [RUNNING]  Bag Time:     15.993302   Duration: 14.993302 / 19.833333                [RUNNING]  Bag Time:     16.154551   Duration: 15.154551 / 19.833333                [RUNNING]  Bag Time:     16.315663   Duration: 15.315663 / 19.833333                [RUNNING]  Bag Time:     16.476918   Duration: 15.476918 / 19.833333                [RUNNING]  Bag Time:     16.638246   Duration: 15.638246 / 19.833333                [RUNNING]  Bag Time:     16.799477   Duration: 15.799477 / 19.833333                [RUNNING]  Bag Time:     16.960744   Duration: 15.960744 / 19.833333                [RUNNING]  Bag Time:     17.162500   Duration: 16.162500 / 19.833333                [RUNNING]  Bag Time:     17.323649   Duration: 16.323649 / 19.833333                [RUNNING]  Bag Time:     17.484935   Duration: 16.484935 / 19.833333                [RUNNING]  Bag Time:     17.646221   Duration: 16.646221 / 19.833333                [RUNNING]  Bag Time:     17.807486   Duration: 16.807486 / 19.833333                [RUNNING]  Bag Time:     17.968732   Duration: 16.968732 / 19.833333                [RUNNING]  Bag Time:     18.129952   Duration: 17.129952 / 19.833333                [RUNNING]  Bag Time:     18.331483   Duration: 17.331483 / 19.833333                [RUNNING]  Bag Time:     18.492737   Duration: 17.492737 / 19.833333                [RUNNING]  Bag Time:     18.653937   Duration: 17.653937 / 19.833333                [RUNNING]  Bag Time:     18.815214   Duration: 17.815214 / 19.833333                [RUNNING]  Bag Time:     18.976400   Duration: 17.976400 / 19.833333                [RUNNING]  Bag Time:     19.137701   Duration: 18.137701 / 19.833333                [RUNNING]  Bag Time:     19.298970   Duration: 18.298970 / 19.833333                [RUNNING]  Bag Time:     19.460016   Duration: 18.460016 / 19.833333                [RUNNING]  Bag Time:     19.661791   Duration: 18.661791 / 19.833333                [RUNNING]  Bag Time:     19.823026   Duration: 18.823026 / 19.833333                [RUNNING]  Bag Time:     19.984373   Duration: 18.984373 / 19.833333                [RUNNING]  Bag Time:     20.145566   Duration: 19.145566 / 19.833333                [RUNNING]  Bag Time:     20.306746   Duration: 19.306746 / 19.833333                [RUNNING]  Bag Time:     20.468038   Duration: 19.468038 / 19.833333                [RUNNING]  Bag Time:     20.629255   Duration: 19.629255 / 19.833333               
+Done.
+[1;33m[ci][0m 节点 30s 没退出，SIGINT
+[0m[ INFO] [1792756216.269216753]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0000.png[0m
+[0m[ INFO] [1792756216.683167565]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0010.png[0m
+[0m[ INFO] [1792756217.100799403]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0020.png[0m
+[0m[ INFO] [1792756217.517005900]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0030.png[0m
+[0m[ INFO] [1792756217.932844358]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0040.png[0m
+[0m[ INFO] [1792756218.349707568]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0050.png[0m
+[0m[ INFO] [1792756218.766739949]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0060.png[0m
+[0m[ INFO] [1792756219.184352729]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0070.png[0m
+[0m[ INFO] [1792756219.599281168]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0080.png[0m
+[0m[ INFO] [1792756220.015735782]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/flow/self_flow_0090.png[0m
+-rw-r--r-- 1 root root 28742 Oct 23 11:50 self_flow_0000.png
+-rw-r--r-- 1 root root 59934 Oct 23 11:50 self_flow_0010.png
+-rw-r--r-- 1 root root 57718 Oct 23 11:50 self_flow_0020.png
+-rw-r--r-- 1 root root 60881 Oct 23 11:50 self_flow_0030.png
+-rw-r--r-- 1 root root 55655 Oct 23 11:50 self_flow_0040.png
+-rw-r--r-- 1 root root 50143 Oct 23 11:50 self_flow_0050.png
+-rw-r--r-- 1 root root 68376 Oct 23 11:50 self_flow_0060.png
+-rw-r--r-- 1 root root 54839 Oct 23 11:50 self_flow_0070.png
+-rw-r--r-- 1 root root 43783 Oct 23 11:50 self_flow_0080.png
+-rw-r--r-- 1 root root 36075 Oct 23 11:50 self_flow_0090.png
+-rw-r--r-- 1 root root 51239 Oct 23 11:50 self_flow_0100.png
+-rw-r--r-- 1 root root 48923 Oct 23 11:50 self_flow_0110.png
+报告已写出：/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/report.md（106 行）
+# LAB5 CI 运行报告
+
+生成时间：2026-10-23 11:50:58（UTC）
+- `GITHUB_REPOSITORY` = `masai114514/vnav-lab5-ci`
+- `GITHUB_SHA` = `14f0dcda487fa1d2c927ea1365f7360b8b9ec0bc`
+- `GITHUB_RUN_ID` = `39948600343`
+- `GITHUB_REF_NAME` = `main`
+- 通过的 stage：env, apt, build_deps, build_main, pair, self_flow
+- **失败的 stage**：video
+
+## 1. 图像对统计（D3 / D5）
+
+官方 `two_frames_tracking.launch`，`images/box.png` + `images/box_in_scene.png`，`mode:=0`。
+
+| 描述子 | kp1 | kp2 | 匹配数 | 良好匹配(Lowe 0.8) | 内点 | 内点率 | 样本数 | 备注 |
+|---|---|---|---|---|---|---|---|---|
+| SIFT | 603 | 969 | 603 | 98 | 76 | 77.6 % | 1 | 与官方 603/969/93/78 差 0 个 kp1 |
+| SURF | 997 | 1822 | 997 | 138 | 91 | 65.9 % | 1 |  |
+| ORB | 500 | 500 | 500 | 13 | 7 | 53.8 % | 1 |  |
+| FAST | 2266 | 3653 | 2266 | 41 | 17 | 41.5 % | 1 |  |
+
+> 官方参考解：603 / 969 / 93 / 78 / 83.9 %。本机复算：603 / 969 / 603 / 98 / 77.6 %。
+
+## 2. 视频序列统计（D6 / D7）
+
+测试序列：`data/seq20s.mp4` → `ci_tools/mp4_to_bag` → `seq20s.bag`（与 TESSE 同话题）。
+
+```
+path:        /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
+version:     2.0
+duration:    19.8s
+start:       Jan 01 1970 00:00:01.00 (1.00)
+end:         Jan 01 1970 00:00:20.83 (20.83)
+size:        22.0 MB
+messages:    240
+compression: none [25/25 chunks]
+types:       rosgraph_msgs/Clock [a9c97c1d230cfc112e270351a944ee47]
+             sensor_msgs/Image   [060021388200f6f0f447d0fcd9c64743]
+topics:      /clock                          120 msgs    : rosgraph_msgs/Clock
+             /tesse/left_cam/rgb/image_raw   120 msgs    : sensor_msgs/Image
+```
+
+| 描述子 | kp1 | kp2 | 匹配数 | 良好匹配 | 内点 | 内点率 | 样本数 |
+|---|---|---|---|---|---|---|---|
+| LK | 72 | 64 | 64 | 64 | 44 | 71.4 % | 114 |
+
+## 3. 可视化产物（D4 / D6 / D7 / D8）
+
+共 46 张，全部在 `out/fig/`：
+
+```

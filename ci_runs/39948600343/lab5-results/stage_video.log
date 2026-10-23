@@ -1,0 +1,70 @@
+
+------------------------------------------------------------------------
+## mp4 -> rosbag
+
+------------------------------------------------------------------------
+[mp4_to_bag] /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/data/seq20s.mp4 -> /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
+             120 帧 320x200 @ 6.00 fps, 时长 20.00 s
+             topic=/tesse/left_cam/rgb/image_raw  (另写 /clock)
+path:        /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/seq20s.bag
+version:     2.0
+duration:    19.8s
+start:       Jan 01 1970 00:00:01.00 (1.00)
+end:         Jan 01 1970 00:00:20.83 (20.83)
+size:        22.0 MB
+messages:    240
+compression: none [25/25 chunks]
+types:       rosgraph_msgs/Clock [a9c97c1d230cfc112e270351a944ee47]
+             sensor_msgs/Image   [060021388200f6f0f447d0fcd9c64743]
+topics:      /clock                          120 msgs    : rosgraph_msgs/Clock
+             /tesse/left_cam/rgb/image_raw   120 msgs    : sensor_msgs/Image
+[1;36m[ci][0m bag 里图像帧数 = 120
+[1;36m[ci][0m roscore 就绪（pid=5130）
+
+------------------------------------------------------------------------
+## 视频序列：descriptor:=LK（max_frames=120, idle_timeout=10 s）
+
+------------------------------------------------------------------------
+-------- 视频累计统计 --------
+Avg. Keypoints 1 Size: 71.6316
+Avg. Keypoints 2 Size: 64.1053
+Avg. Number of matches: 64.1053
+Avg. Number of good matches: 64.1053
+Avg. Number of Inliers: 44.1491
+Avg. Inliers ratio: 0.714499
+Num. of samples: 114
+
+------------------------------------------------------------------------
+## 视频序列：descriptor:=SIFT（max_frames=120, idle_timeout=10 s）
+
+------------------------------------------------------------------------
+ci/lab5_ci.sh: line 535:  5234 Segmentation fault      (core dumped) stdbuf -oL -eL rosrun lab_5 track_features _mode:=1 _descriptor:="$desc" _output_dir:="$figdir" _interactive:=false _lk_save_every:=10 _max_frames:="$nframes" _idle_timeout:=10.0 /images_topic:=/camera/color/image_raw > "$nlog" 2>&1
+-------- 视频累计统计 --------
+[1;33m[ci][0m SIFT 视频模式没有打出统计
+[0m[ INFO] [1792756196.125212072]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/sift_matches_inliers_outliers.png[0m
+
+------------------------------------------------------------------------
+## 视频序列：descriptor:=ORB（max_frames=120, idle_timeout=10 s）
+
+------------------------------------------------------------------------
+ci/lab5_ci.sh: line 535:  5283 Segmentation fault      (core dumped) stdbuf -oL -eL rosrun lab_5 track_features _mode:=1 _descriptor:="$desc" _output_dir:="$figdir" _interactive:=false _lk_save_every:=10 _max_frames:="$nframes" _idle_timeout:=10.0 /images_topic:=/camera/color/image_raw > "$nlog" 2>&1
+-------- 视频累计统计 --------
+[1;33m[ci][0m ORB 视频模式没有打出统计
+[0m[ INFO] [1792756204.792471954]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/orb_matches_inliers_outliers.png[0m
+total 1380
+drwxr-xr-x 2 root root   4096 Oct 23 11:50 .
+drwxr-xr-x 4 root root   4096 Oct 23 11:49 ..
+-rw-r--r-- 1 root root  89033 Oct 23 11:49 lk_tracks_0000.png
+-rw-r--r-- 1 root root  92989 Oct 23 11:49 lk_tracks_0010.png
+-rw-r--r-- 1 root root  98390 Oct 23 11:49 lk_tracks_0020.png
+-rw-r--r-- 1 root root  90035 Oct 23 11:49 lk_tracks_0030.png
+-rw-r--r-- 1 root root  93460 Oct 23 11:49 lk_tracks_0040.png
+-rw-r--r-- 1 root root  83114 Oct 23 11:49 lk_tracks_0050.png
+-rw-r--r-- 1 root root  97147 Oct 23 11:49 lk_tracks_0060.png
+-rw-r--r-- 1 root root  83517 Oct 23 11:49 lk_tracks_0070.png
+-rw-r--r-- 1 root root  83344 Oct 23 11:49 lk_tracks_0080.png
+-rw-r--r-- 1 root root 103312 Oct 23 11:49 lk_tracks_0090.png
+-rw-r--r-- 1 root root  92549 Oct 23 11:49 lk_tracks_0100.png
+-rw-r--r-- 1 root root 106718 Oct 23 11:49 lk_tracks_0110.png
+-rw-r--r-- 1 root root 129951 Oct 23 11:50 orb_matches_inliers_outliers.png
+-rw-r--r-- 1 root root 132020 Oct 23 11:49 sift_matches_inliers_outliers.png

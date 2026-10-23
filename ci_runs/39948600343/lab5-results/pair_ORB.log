@@ -1,0 +1,14 @@
+[0m[ INFO] [1792756168.224264896]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box.png[0m
+[0m[ INFO] [1792756168.225127672]: Got param: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_main/src/lab_5/images/box_in_scene.png[0m
+[0m[ INFO] [1792756168.245106713]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_keypoints_img1.png[0m
+[0m[ INFO] [1792756168.254478949]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_keypoints_img2.png[0m
+[0m[ INFO] [1792756168.296013124]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_all_knn.png[0m
+[0m[ INFO] [1792756168.309820975]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_good_lowe.png[0m
+[0m[ INFO] [1792756168.328687144]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/pair/orb_matches_inliers_outliers.png[0m
+Avg. Keypoints 1 Size: 500
+Avg. Keypoints 2 Size: 500
+Avg. Number of matches: 500
+Avg. Number of good matches: 13
+Avg. Number of Inliers: 7
+Avg. Inliers ratio: 0.538462
+Num. of samples: 1

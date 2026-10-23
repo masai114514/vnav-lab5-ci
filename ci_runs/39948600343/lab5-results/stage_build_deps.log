@@ -1,0 +1,3 @@
+[1;36m[ci][0m deps 缓存命中（/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install 已就绪），跳过 OpenCV 编译
+109M	/home/runner/work/vnav-lab5-ci/vnav-lab5-ci/ws_deps/install
+  已缓存 libopencv*.so : 75 个

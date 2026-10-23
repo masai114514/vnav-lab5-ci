@@ -1,0 +1,20 @@
+[0m[ INFO] [1792756176.267184995]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0000.png[0m
+[0m[ INFO] [1792756176.685125026]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0010.png[0m
+[0m[ INFO] [1792756177.097427128]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0020.png[0m
+[0m[ INFO] [1792756177.514170101]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0030.png[0m
+[0m[ INFO] [1792756177.974783221]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0040.png[0m
+[0m[ INFO] [1792756178.389601890]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0050.png[0m
+[0m[ INFO] [1792756178.807676697]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0060.png[0m
+[0m[ INFO] [1792756179.266009161]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0070.png[0m
+[0m[ INFO] [1792756179.680571969]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0080.png[0m
+[0m[ INFO] [1792756180.098066565]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0090.png[0m
+[0m[ INFO] [1792756180.557862247]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0100.png[0m
+[0m[ INFO] [1792756181.016115358]: Saved figure: /home/runner/work/vnav-lab5-ci/vnav-lab5-ci/out/fig/video/lk_tracks_0110.png[0m
+[0m[ INFO] [1792756191.792842798]: No image for 10.0 s after 119 frames, shutting down[0m
+Avg. Keypoints 1 Size: 71.6316
+Avg. Keypoints 2 Size: 64.1053
+Avg. Number of matches: 64.1053
+Avg. Number of good matches: 64.1053
+Avg. Number of Inliers: 44.1491
+Avg. Inliers ratio: 0.714499
+Num. of samples: 114

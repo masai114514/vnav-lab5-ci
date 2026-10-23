@@ -35,8 +35,16 @@ using namespace cv::xfeatures2d;
 void imageCallback(const sensor_msgs::ImageConstPtr &msg,
                    std::shared_ptr <FeatureTracker> feature_tracker) {
   try {
-    // Convert ROS msg type to OpenCV image type.
-    cv::Mat image = cv_bridge::toCvShare(msg, "bgr8")->image;
+    // 这里必须是 toCvCopy，不能是 toCvShare。
+    // toCvShare 返回的 Mat 只是「指向 ROS 消息缓冲区的一个头」，不做拷贝；
+    // 一旦回调返回、msg 的引用计数归零，那块内存就被回收了，而 prev_image
+    // 还指着它 —— 下一帧 read 就是 use-after-free，SIFT/ORB 在视频模式下
+    // 第 2 帧直接 Segmentation fault（CI Run #10 就是这么挂的）。
+    // 换成 toCvCopy 后 Mat 自带引用计数，跨回调保存才安全。
+    const cv::Mat image = cv_bridge::toCvCopy(msg, "bgr8")->image;
+    if (image.empty()) {
+      return;
+    }
 
     // Visualize the image. interactive:=false（CI / 无显示器）时不画窗口，
     // 逐步的可视化结果由 FeatureTracker::saveImage 落盘。
@@ -44,7 +52,14 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg,
     if (interactive) {
       cv::imshow("view", image);
     }
-    static cv::Mat prev_image = image;
+    static cv::Mat prev_image;
+    if (prev_image.empty()) {
+      // 第一帧没有「前一帧」可比，先存下来直接跳过。
+      // 原骨架是拿第 0 帧跟自己比一次，会往平均值里塞进一条无意义的
+      // 100% 内点记录（SIFT 在 320x200 上自己匹配自己，内点率必然 1.0）。
+      prev_image = image;
+      return;
+    }
     feature_tracker->trackFeatures(image, prev_image);
     if (interactive) {
       cv::waitKey(1);
