@@ -7,11 +7,26 @@ name: lab5-ci
 # SIFT/SURF)，而且 SIFT/SURF 只有在 OPENCV_ENABLE_NONFREE=ON 的源码编译里才存在
 # （pip 轮子一律排除）。本机 macOS 装不了，Windows 队友装 WSL2 也要 40 分钟起。
 # 所以搬到这里：runner 是原生 x86_64，容器给原版 bionic + ROS melodic，
-# 一次编译 ≈20 分钟，之后靠缓存只需 6~10 分钟。和 lab3/lab4 是同一套做法。
+# 一次编译 ≈25 分钟，之后靠缓存只需 6~10 分钟。和 lab3/lab4 是同一套做法。
+#
+# ⚠️ 为什么容器是 `docker run` 而不是 job 级别的 `container:`
+# ------------------------------------------------------------
+# lab3/lab4 用的是 job 级 `container: ros:noetic-ros-base`（20.04，glibc 2.31），能跑。
+# 但 lab5 官方环境是 **melodic（Ubuntu 18.04，glibc 2.27）**，而 GitHub 从 2025-09
+# 起把 JS action 的 runtime 升到 Node 24，要求 **glibc ≥ 2.28**。于是 job 级容器里
+# `actions/checkout` 一上来就死：
+#     /__e/node24/bin/node: /lib/x86_64-linux-gnu/libc.so.6:
+#     version `GLIBC_2.28' not found
+# （实测 Run #1，35 秒失败）。升级容器里的 glibc 是不现实的。
+#
+# 解法：**让 action 在 host（ubuntu-22.04）上跑，只在真正干活那一步 docker run 进
+# melodic 容器**。这样 checkout / cache / upload-artifact 全部正常，而编译与运行的
+# 环境仍是课程组的原版 melodic —— 不改任何一行官方依赖。
 #
 # 触发方式：
 #   - 手动（Actions 页面 → Run workflow）
-#   - push / PR 到 main（改 md 不触发，见 paths）
+#   - push 到任意分支（队友在自己的 feat/* 分支上推就能出自己那部分的数字）
+#   - PR 到 main
 #
 # 产物：artifact `lab5-results`，含 out/report.md + out/fig/*.png + 全部日志
 # =============================================================================
@@ -51,6 +66,11 @@ concurrency:
   group: lab5-ci-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  # 课程组的原版环境。想试 noetic 就把这里换成 ros:noetic-ros-base
+  # （但 OpenCV 3.4.2 在 GCC 9 上要额外打 <limits> 补丁，见 ci/lab5_ci.sh 注释）
+  ROS_IMAGE: ros:melodic-ros-base
+
 jobs:
   lab5:
     name: 编译 + 跑 lab5（melodic 容器）
@@ -58,21 +78,14 @@ jobs:
     # 首次（无缓存）OpenCV 3.4.2 编译 + 全部测试 ≈ 45 分钟，留足余量
     timeout-minutes: 75
 
-    # 容器 job：原版 bionic + ROS melodic，避免在 22.04 上折腾 RoboStack。
-    # --user root : apt 需要（runner 的默认 user 不在容器的 sudoers 里）
-    container:
-      image: ros:melodic-ros-base
-      options: --user root
-
     steps:
       - uses: actions/checkout@v4
 
-      # 缓存的是「依赖工作区的 install 空间」：OpenCV 3.4.2 + contrib(全模块裁剪版)
+      # 缓存的是「依赖工作区的 install 空间」：OpenCV 3.4.2 + contrib(裁剪版)
       # + glog/gflags/catkin_simple。命中时 lab5_ci.sh 的 build_deps 整段跳过。
       #
       # key 里挂 CMakeLists 的 hash：改了 nonfree 开关 / 模块列表就自动重建。
-      # restore-keys 允许「换 key 但恢复到最近的旧缓存」——配合脚本里
-      # install/setup.bash 的存在性判断，能省一次全量编译。
+      # restore-keys 允许「换 key 但恢复到最近的旧缓存」。
       - name: 恢复 OpenCV 依赖缓存
         id: deps-cache
         uses: actions/cache@v4
@@ -82,31 +95,51 @@ jobs:
           restore-keys: |
             deps-melodic-nonfree-v1-
 
-      # 注意：容器 job 的默认 shell 是 sh(dash)，`set -o pipefail` 会直接报
-      # `set: Illegal option -o pipefail`。凡是 run: 都显式 shell: bash。
       - name: 环境信息
         shell: bash
         run: |
-          echo "vCPU = $(nproc)"
-          free -m | awk '/Mem:/{printf "内存 = %s MB\n", $2}'
-          echo "PWD  = $PWD"
-          echo "缓存 = ${{ steps.deps-cache.outputs.cache-hit }}"
+          echo "vCPU      = $(nproc)"
+          free -m | awk '/Mem:/{printf "内存      = %s MB\n", $2}'
+          echo "PWD       = $PWD"
+          echo "镜像      = $ROS_IMAGE"
+          echo "缓存命中  = ${{ steps.deps-cache.outputs.cache-hit }}"
+          docker --version
 
+      # 关键：docker run 而不是 job 级 container（原因见文件头）。
+      #   -v "$PWD":"$PWD" : 挂到**同一个绝对路径**，这样容器内 catkin 生成的
+      #                      setup.bash 里的绝对路径在 host 上仍然有效，
+      #                      actions/cache 缓存下来的 ws_deps/install 也能直接用。
+      #   --user root      : 容器内要 apt-get install。
+      #   -e VAR           : 只透传脚本真正读的几个环境变量（不要 -e 全透传，
+      #                      里面有 GITHUB_TOKEN）。
       - name: 主流程（编译 + 图像对 + 视频 + 光流 + 汇总）
         shell: bash
         env:
           PAIR_DESCRIPTORS: ${{ inputs.pair_descriptors || 'SIFT SURF ORB FAST' }}
           VIDEO_DESCRIPTORS: ${{ inputs.video_descriptors || 'LK SIFT ORB' }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_SHA: ${{ github.sha }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          # 没有这行，脚本失败也会显示 success、留下空产物（lab3 踩过）
+          # 没有这行，容器失败也会显示 success、留下空产物（lab3 踩过）
           set -o pipefail
           mkdir -p out
-          bash ci/lab5_ci.sh
+
+          # GH 的 bash 模板自带 -e，直接跑会在 docker 非零退出时立刻中断，
+          # 拿不到 rc、也跑不到后面的 chown。所以先关掉，自己收退出码。
+          set +e
+          docker run --rm \
+            --user root \
+            -v "$PWD":"$PWD" -w "$PWD" \
+            -e PAIR_DESCRIPTORS \
+            -e VIDEO_DESCRIPTORS \
+            -e GITHUB_RUN_ID -e GITHUB_SHA -e GITHUB_REF_NAME -e GITHUB_REPOSITORY \
+            "$ROS_IMAGE" \
+            bash ci/lab5_ci.sh
           rc=$?
+          set -e
+
+          # 容器里是 root，产物属主是 root —— upload-artifact 以 runner 用户跑，
+          # 只要可读就行（默认 644/755 即可读）。这里顺手收一下权限，
+          # 免得后面 ls/diff 出别扭的提示。
+          sudo chown -R "$(id -u):$(id -g)" out ws_deps 2>/dev/null || true
           echo "lab5_ci.sh 退出码 = $rc"
           exit $rc
 
@@ -134,6 +167,7 @@ jobs:
             echo "## LAB5 运行摘要"
             echo
             echo "- 依赖缓存命中：\`${{ steps.deps-cache.outputs.cache-hit }}\`"
+            echo "- 镜像：\`$ROS_IMAGE\`"
             echo "- vCPU：\`$(nproc)\`"
             echo
             if [ -f out/report.md ]; then
