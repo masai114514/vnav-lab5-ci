@@ -54,8 +54,15 @@ bash fetch_artifacts.sh <run_id>     # 指定一次
 | `fetch_artifacts.sh` | 拉回 artifact 并打印两张表 + 图清单 |
 | `bundle/` | **自动生成的源码镜像，不要手改**（下次 sync 就覆盖了） |
 
-## 五个容易踩回去的坑（都已在脚本里注释）
+## 六个容易踩回去的坑（都已在脚本/工作流里注释）
 
+0. **不能用 job 级 `container:`。** lab3/lab4 那种写法在这里必挂：GitHub 从 2025-09 起
+   把 JS action 的 runtime 升到 Node 24（要求 glibc ≥ 2.28），而 `ros:melodic` 是
+   Ubuntu 18.04（glibc **2.27**），`actions/checkout` 一上来就
+   `version 'GLIBC_2.28' not found`，35 秒整个 run 失败（实测 Run #1）。
+   **解法：action 全在 host（ubuntu-22.04）上跑，只在干活那一步 `docker run` 进 melodic。**
+   挂载必须用同一个绝对路径 `-v "$PWD":"$PWD"`，否则 catkin 的 `setup.bash` 和
+   缓存的 `ws_deps/install` 对不上。
 1. **ROS1 的 apt key 2025-06-01 过期。** `apt-get update` 直接 GPG error，后面一步都跑不了。
    脚本先试一次，失败就重装 `ros.key` 并重写 sources.list，再失败就把 Ubuntu 源切到
    `old-releases.ubuntu.com`。
@@ -72,6 +79,8 @@ bash fetch_artifacts.sh <run_id>     # 指定一次
    ⚠️ 但正式交付的数字仍建议用课程组发的真数据集；这个只是让 CI 能跑通链路。
 5. **`bash x.sh | tee log` 的退出码来自 tee。** 不在 workflow 里加 `set -o pipefail`，
    脚本失败也会显示 success、留下空产物（lab3 踩过）。
+   容器那步还要额外 `set +e` 收 `$?`，否则 GH 的 `-e` 会在 docker 非零退出时直接中断，
+   后面的 `chown` 和退出码都没了。
 
 ## 耗时与缓存
 

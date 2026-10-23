@@ -49,15 +49,35 @@ stage() {
   local name="$1"; shift
   banner "STAGE $name : $*"
   local log="$OUT/stage_${name}.log"
-  local t0=$SECONDS
-  if ( set -euo pipefail; "$@" ) 2>&1 | tee "$log"; then
+  local t0=$SECONDS rc=0
+  # 退出码必须取 PIPESTATUS[0]（= 子 shell），不能取整条管道的状态：
+  # 管道最后一个是 `tee`，它永远成功。Run #2 里 lab_5 的 cmake 明明失败、
+  # track_features 根本没编出来，四个 stage 却全报 PASS，就栽在这里。
+  set +e
+  ( set -euo pipefail; "$@" ) 2>&1 | tee "$log"
+  rc=${PIPESTATUS[0]}
+  set -e
+  if [ "$rc" -eq 0 ]; then
     say "PASS $name ($((SECONDS - t0))s)"
     PASS+=("$name")
   else
-    warn "FAIL $name ($((SECONDS - t0))s) —— 见 out/stage_${name}.log"
+    warn "FAIL $name ($((SECONDS - t0))s, rc=$rc) —— 见 out/stage_${name}.log"
     FAIL+=("$name")
   fi
   cat "$log" >> "$OUT/console.log" || true
+  return 0
+}
+
+# 运行时前置检查：没有 track_features 就什么都跑不了。
+# 别让 roslaunch 在那儿干等 120 s 再被 timeout 杀掉 —— Run #2 里四个描述子
+# 白烧了 20 分钟，日志里全是 "cannot launch node of type [lab_5/track_features]"。
+need_bin() {
+  local bin="$1"
+  if [ ! -x "$bin" ]; then
+    echo "✗ 缺少可执行文件：$bin" >&2
+    echo "  lab_5 没编过 —— 先看 out/stage_build_main.log 里的 cmake 报错" >&2
+    return 1
+  fi
   return 0
 }
 
@@ -106,6 +126,7 @@ s_apt() {
 
   apt-get install -y -qq --no-install-recommends \
     build-essential cmake git curl patch pkg-config \
+    autoconf automake libtool m4 \
     python-dev python-numpy python-catkin-pkg python-empy python-nose \
     python-catkin-tools \
     libboost-python-dev libboost-system-dev libboost-thread-dev libboost-filesystem-dev \
@@ -118,7 +139,9 @@ s_apt() {
   say "---------- 关键依赖版本 ----------"
   python --version 2>&1 || true
   catkin --version 2>&1 | head -2 || true
-  ls /opt/ros/melodic/include/cv_bridge/cv_bridge.h >/dev/null && echo "cv_bridge 头文件: 有"
+  if [ -f /opt/ros/melodic/include/cv_bridge/cv_bridge.h ]; then
+    echo "cv_bridge 头文件: 有"
+  fi
 }
 
 # =============================================================================
@@ -129,7 +152,10 @@ s_build_deps() {
      grep -q "$WS_DEPS" "$WS_DEPS/install/setup.bash" 2>/dev/null; then
     say "deps 缓存命中（$WS_DEPS/install 已就绪），跳过 OpenCV 编译"
     du -sh "$WS_DEPS/install"
-    ls "$WS_DEPS/install/lib" | grep -c '^libopencv' | awk '{print "  已缓存 libopencv*.so : "$1" 个"}'
+    # catkin_tools 的 --extend 要找这个标记文件，cache 没存到就补一个
+    touch "$WS_DEPS/install/.catkin"
+    ls "$WS_DEPS/install/lib" 2>/dev/null | grep -c '^libopencv' \
+      | awk '{print "  已缓存 libopencv*.so : "$1" 个"}' || true
     return 0
   fi
 
@@ -140,8 +166,7 @@ s_build_deps() {
   # 课程给的依赖（opencv3_catkin 已打 OPENCV_ENABLE_NONFREE=ON 的补丁）
   cp -r "$BUNDLE/dependencies/." "$WS_DEPS/src/"
 
-  # rosinstall 里另外两个：catkin_simple / glog_catkin / gflags_catkin
-  local try_clone
+  # rosinstall 里另外三个：catkin_simple / glog_catkin / gflags_catkin
   try_clone() {
     local url="$1" dest="$2" branch="${3:-master}"
     for i in 1 2 3; do
@@ -165,15 +190,93 @@ s_build_deps() {
 
   cd "$WS_DEPS"
   catkin config --install --extend /opt/ros/melodic \
-    --cmake-args -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-O2
+    --cmake-args -DCMAKE_BUILD_TYPE=Release
   # catkin_simple 是 CMake 宏包，必须单独先建好
   catkin build catkin_simple -j1
-  # OpenCV 的 ExternalProject 要下 ~120 MB 源码，超时设大一点
-  catkin build -j"$(nproc)" --no-status --summarize
+  # OpenCV 的 ExternalProject 要下 ~120 MB 源码，超时设大一点。
+  # 不用 `set -e` 直接中断：glog 挂了也要把 OpenCV 编完（它是 20 分钟的大头），
+  # 后面再用 shim 兜 glog，这样下一趟缓存还能命中。
+  local rc_deps=0
+  catkin build -j"$(nproc)" --no-status --summarize || rc_deps=$?
   cd "$ROOT"
 
+  # ---------- 校验四个依赖真的产出了 CMake config ----------
+  # 只看 install/setup.bash 是否存在是不够的：Run #2 里 glog_catkin 编译失败
+  # （bionic 缺 autoreconf），setup.bash 照样生成，于是 deps 被误判为成功，
+  # 一路拖到 s_build_main 才炸在 `Could not find glog_catkin`。
+  dep_ok() { find "$WS_DEPS/install" -name "$1Config.cmake" -print -quit 2>/dev/null | grep -q .; }
+
+  local missing=() d
+  for d in opencv3_catkin glog_catkin gflags_catkin catkin_simple; do
+    if dep_ok "$d"; then
+      echo "  ✓ $d"
+    else
+      echo "  ✗ $d  （没有 $dConfig.cmake）"
+      missing+=("$d")
+    fi
+  done
+
+  # ---------- glog 兜底 ----------
+  # lab_5 的源码里其实一行 glog 都没用（grep 过），只是 CMakeLists 里
+  # find_package(glog_catkin) + 链接 ${catkin_LIBRARIES}。所以 glog_catkin
+  # 用官方源码编不出来时，用系统 glog（bionic 正好也是 0.3.5）做一个同名
+  # shim 包，接口等价、3 秒建好，完全不碰课程给的源。
+  if printf '%s\n' "${missing[@]:-}" | grep -qx glog_catkin; then
+    warn "glog_catkin 没编出来 —— 改用系统 libgoogle-glog-dev 的同名 shim"
+    apt-get install -y -qq --no-install-recommends libgoogle-glog-dev 2>&1 | tail -3
+    # 源目录、build/、logs/ 三处都要清，否则 catkin 会沿用上次失败的缓存
+    rm -rf "$WS_DEPS/src/glog_catkin" \
+           "$WS_DEPS/build/glog_catkin" \
+           "$WS_DEPS/logs/glog_catkin"
+    mkdir -p "$WS_DEPS/src/glog_catkin_shim"
+    cat > "$WS_DEPS/src/glog_catkin_shim/package.xml" <<'XML'
+<?xml version="1.0"?>
+<package format="2">
+  <name>glog_catkin</name>
+  <version>0.3.5</version>
+  <description>CI shim: 用系统 libgoogle-glog 冒充 ethz-asl/glog_catkin</description>
+  <maintainer email="ci@example.com">ci</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+</package>
+XML
+    cat > "$WS_DEPS/src/glog_catkin_shim/CMakeLists.txt" <<'CMK'
+cmake_minimum_required(VERSION 3.0.2)
+project(glog_catkin)
+find_package(catkin REQUIRED)
+find_library(GLOG_LIBRARY NAMES glog REQUIRED)
+catkin_package(INCLUDE_DIRS /usr/include LIBRARIES ${GLOG_LIBRARY})
+CMK
+    cd "$WS_DEPS"
+    catkin build glog_catkin -j1 --no-status --force-cmake || true
+    cd "$ROOT"
+    if dep_ok glog_catkin; then
+      say "glog shim 生效"
+      missing=("${missing[@]/glog_catkin/}")
+    fi
+  fi
+
+  # 剩下还缺的就是真问题（尤其 opencv3_catkin），如实报错
+  local still=()
+  for d in "${missing[@]:-}"; do
+    [ -n "$d" ] && still+=("$d")
+  done
+  if [ "${#still[@]}" -gt 0 ]; then
+    echo "✗ 依赖缺失：${still[*]}（catkin build 退出码 $rc_deps）" >&2
+    return 1
+  fi
+
+  # catkin_tools 的 --extend 会验证目标是个 catkin 空间（找 .catkin 标记文件）；
+  # 缺了它 s_build_main 会直接报 "Unable to find catkin config file"。
+  touch "$WS_DEPS/install/.catkin"
+  test -f "$WS_DEPS/install/setup.bash" || {
+    echo "install/setup.bash 没生成 —— catkin --install 没生效" >&2
+    return 1
+  }
+
   du -sh "$WS_DEPS/install"
-  ls "$WS_DEPS/install/lib" | grep -c '^libopencv' | awk '{print "  libopencv*.so : "$1" 个"}'
+  ls "$WS_DEPS/install/lib" 2>/dev/null | grep -c '^libopencv' \
+    | awk '{print "  libopencv*.so : "$1" 个"}' || true
   # SURF 能不能用，取决于这两个宏；编完立刻验一次
   grep -i "OPENCV_ENABLE_NONFREE" "$WS_DEPS/install/include/opencv2/opencv_modules.hpp" 2>/dev/null || true
   if ls "$WS_DEPS/install/include/opencv2/xfeatures2d" >/dev/null 2>&1; then
@@ -202,10 +305,11 @@ s_build_main() {
 
   cd "$WS_MAIN"
   catkin config --extend "$WS_DEPS/install" \
-    --cmake-args -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-O2
+    --cmake-args -DCMAKE_BUILD_TYPE=Release
   # 先编 cv_bridge，让后面的包链接到我们自己这份
   catkin build cv_bridge -j"$(nproc)" --no-status
-  catkin build lab_5 ci_tools -j"$(nproc)" --no-status --summarize
+  local rc_build=0
+  catkin build lab_5 ci_tools -j"$(nproc)" --no-status --summarize || rc_build=$?
   cd "$ROOT"
 
   say "---------- 编出来的可执行文件 ----------"
@@ -219,7 +323,7 @@ s_build_main() {
     echo "## 编译环境"
     echo "- ROS: $(. /opt/ros/melodic/setup.bash && echo "$ROS_DISTRO")"
     echo "- gcc: $(gcc -dumpversion)"
-    echo "- OpenCV: $("$WS_MAIN/devel/lib/ci_tools/mp4_to_bag" --help 2>&1 | head -1 || true)"
+    echo "- OpenCV: $(grep -h 'define CV_VERSION' "$WS_DEPS/install/include/opencv2/core/version.hpp" 2>/dev/null | sed 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/' | head -1)"
     echo
     echo "## lab_5 产物"
     ls -la "$WS_MAIN/devel/lib/lab_5/"
@@ -232,6 +336,15 @@ s_build_main() {
     ldd "$WS_MAIN/devel/lib/libcv_bridge.so" 2>/dev/null | grep -i opencv | head -4 || true
   } > "$OUT/build_evidence.txt" 2>&1
   cat "$OUT/build_evidence.txt"
+
+  # 编译是否真的成功，只认这个文件在不在 —— 不认 catkin 的退出码，
+  # 也不认 devel/lib 里有没有别的包（ci_tools 编过不代表 lab_5 编过）。
+  if [ ! -x "$WS_MAIN/devel/lib/lab_5/track_features" ]; then
+    echo "✗ lab_5/track_features 没编出来（catkin 退出码 $rc_build）" >&2
+    echo "  完整 cmake/make 日志：ws_main/logs/lab_5/" >&2
+    return 1
+  fi
+  return "$rc_build"
 }
 
 # =============================================================================
@@ -242,23 +355,36 @@ s_pair() {
   . "$WS_DEPS/install/setup.bash"
   . "$WS_MAIN/devel/setup.bash"
 
-  local desc
+  need_bin "$WS_MAIN/devel/lib/lab_5/track_features" || return 1
+
+  local desc rc bad=0
   for desc in ${PAIR_DESCRIPTORS:-SIFT SURF ORB FAST}; do
     banner "图像对：descriptor:=$desc"
-    # mode 0 跑完自己退出（interactive:=false 不阻塞）；300 s 只是兜底
-    timeout -s INT 300 roslaunch lab_5 two_frames_tracking.launch \
+    # mode 0 跑完自己退出（interactive:=false 不阻塞）；120 s 只是兜底
+    rc=0
+    timeout -s INT 120 roslaunch lab_5 two_frames_tracking.launch \
       descriptor:="$desc" \
       output_dir:="$OUT/fig" \
       interactive:=false \
-      2>&1 | tee "$OUT/pair_${desc}.log" || true
+      2>&1 | tee "$OUT/pair_${desc}.log" || rc=$?
+    if [ "$rc" -eq 124 ] || [ "$rc" -eq 130 ]; then
+      warn "$desc 超时（120 s）—— 多半是 interactive 没生效或 roslaunch 挂住了"
+      bad=1
+    fi
     echo "-------- 统计表（官方格式）--------"
-    grep -E 'Avg\.|Num\. of samples' "$OUT/pair_${desc}.log" || \
+    if grep -E 'Avg\.|Num\. of samples' "$OUT/pair_${desc}.log"; then
+      :
+    else
       warn "$desc 没有打出统计 —— 见 out/pair_${desc}.log"
-    if grep -qi "patented\|nonfree\|NONFREE" "$OUT/pair_${desc}.log"; then
+      sed -n '$p' "$OUT/pair_${desc}.log" || true
+      bad=1
+    fi
+    if grep -qi "patented\|nonfree" "$OUT/pair_${desc}.log"; then
       warn "$desc 报 nonfree 错误：OpenCV 没开 OPENCV_ENABLE_NONFREE"
     fi
   done
   ls -la "$OUT/fig" || true
+  return "$bad"
 }
 
 # =============================================================================
@@ -269,27 +395,53 @@ s_video() {
   . "$WS_DEPS/install/setup.bash"
   . "$WS_MAIN/devel/setup.bash"
 
-  banner "mp4 -> rosbag"
-  rosrun ci_tools mp4_to_bag "$ROOT/data/seq20s.mp4" "$OUT/seq20s.bag" \
-    2>&1 | tee "$OUT/mp4_to_bag.log"
-  rosbag info "$OUT/seq20s.bag" | tee "$OUT/bag_info.txt"
+  need_bin "$WS_MAIN/devel/lib/lab_5/track_features" || return 1
 
-  local desc
+  banner "mp4 -> rosbag"
+  local rc=0
+  rosrun ci_tools mp4_to_bag "$ROOT/data/seq20s.mp4" "$OUT/seq20s.bag" \
+    2>&1 | tee "$OUT/mp4_to_bag.log" || rc=$?
+  if [ "$rc" -ne 0 ] || [ ! -s "$OUT/seq20s.bag" ]; then
+    echo "✗ mp4_to_bag 失败（rc=$rc）—— 后面三个描述子都跑不了" >&2
+    return 1
+  fi
+  # 坏包在这里就拦住：unindexed 的 bag 会让 rosbag play 报 ERROR 后行为不可预期，
+  # Run #2 里 s_flow 就是被一个坏包拖了 37 分钟。
+  # 先落盘再 grep：`... | tee f | grep -q` 里 grep 提前退出会让 tee 吃 SIGPIPE，
+  # pipefail 下整条管道变成 141，误判成 bag 坏了。
+  rc=0
+  timeout -s INT 60 rosbag info "$OUT/seq20s.bag" > "$OUT/bag_info.txt" 2>&1 || rc=$?
+  cat "$OUT/bag_info.txt"
+  if [ "$rc" -ne 0 ] || ! grep -qE 'messages:[[:space:]]*[0-9]+' "$OUT/bag_info.txt"; then
+    echo "✗ bag 打不开或没有消息（rc=$rc，可能是 unindexed）" >&2
+    return 1
+  fi
+
+  local desc bad=0
   for desc in ${VIDEO_DESCRIPTORS:-LK SIFT ORB}; do
     banner "视频序列：descriptor:=$desc"
-    # 20 s 的 bag，留 40 s 余量；到时用 SIGINT 结束，好让节点跑到 printStats
-    timeout -s INT 90 roslaunch lab_5 video_tracking.launch \
+    # 20 s 的 bag，留足余量；到时用 SIGINT 结束，好让节点跑到 printStats
+    rc=0
+    timeout -s INT 120 roslaunch lab_5 video_tracking.launch \
       path_to_dataset:="$OUT/seq20s.bag" \
       descriptor:="$desc" \
       output_dir:="$OUT/fig" \
       interactive:=false \
       lk_save_every:=10 \
-      2>&1 | tee "$OUT/video_${desc}.log" || true
+      2>&1 | tee "$OUT/video_${desc}.log" || rc=$?
+    if [ "$rc" -eq 124 ] || [ "$rc" -eq 130 ]; then
+      warn "$desc 超时（120 s）"
+    fi
     echo "-------- 视频累计统计 --------"
-    grep -E 'Avg\.|Num\. of samples' "$OUT/video_${desc}.log" || \
+    if grep -E 'Avg\.|Num\. of samples' "$OUT/video_${desc}.log"; then
+      :
+    else
       warn "$desc 视频模式没有打出统计"
+      bad=1
+    fi
   done
   ls -la "$OUT/fig" | head -40 || true
+  return "$bad"
 }
 
 # =============================================================================
@@ -300,24 +452,53 @@ s_flow() {
   . "$WS_DEPS/install/setup.bash"
   . "$WS_MAIN/devel/setup.bash"
 
+  need_bin "$WS_MAIN/devel/lib/lab_5/self_flow" || return 1
+  if [ ! -s "$OUT/seq20s.bag" ]; then
+    echo "✗ 没有 seq20s.bag（s_video 没跑成）—— 光流没有输入" >&2
+    return 1
+  fi
+
   banner "D8：Farneback 稠密光流"
-  # self_flow 没有官方 launch，直接 rosrun + remap
-  timeout -s INT 90 rosrun lab_5 self_flow \
+  # self_flow 没有官方 launch，直接 rosrun + remap。
+  # ⚠️ 这里每一步都必须有硬超时：Run #2 里这一步整整挂了 37 分钟，
+  #    一直挂到 job 的 75 分钟上限被 GitHub 取消（连带 OpenCV 缓存也没存成）。
+  rm -f "$OUT/self_flow.log"
+  timeout -s INT 120 rosrun lab_5 self_flow \
       /images_topic:=/camera/color/image_raw \
       _interactive:=false \
       _output_dir:="$OUT/fig" \
       > "$OUT/self_flow.log" 2>&1 &
   local node_pid=$!
 
-  rosbag play --clock "$OUT/seq20s.bag" \
+  local rc=0
+  timeout -s INT 150 rosbag play --clock -r 2 "$OUT/seq20s.bag" \
     /tesse/left_cam/rgb/image_raw:=/camera/color/image_raw \
-    2>&1 | tail -5 || true
+    > "$OUT/rosbag_play_flow.log" 2>&1 || rc=$?
+  tail -5 "$OUT/rosbag_play_flow.log" || true
 
-  sleep 2
-  kill -INT "$node_pid" 2>/dev/null || true
+  # 给节点留 3 s 收尾（写最后一张图），然后最多等 20 s 让它自然退出，
+  # 不退出就 KILL —— 绝不再出现「wait 等一个不响应的进程」。
+  sleep 3
+  local i
+  for i in $(seq 1 20); do
+    kill -0 "$node_pid" 2>/dev/null || break
+    sleep 1
+  done
+  if kill -0 "$node_pid" 2>/dev/null; then
+    warn "self_flow 20 s 内没退出，强制结束"
+    kill -INT "$node_pid" 2>/dev/null || true
+    sleep 2
+    kill -KILL "$node_pid" 2>/dev/null || true
+  fi
   wait "$node_pid" 2>/dev/null || true
+
   grep -E 'Saved figure|ERROR|error' "$OUT/self_flow.log" | head -10 || true
-  ls -la "$OUT/fig" | grep -i flow || warn "没有稠密光流图"
+  if ls "$OUT/fig" | grep -qi flow; then
+    ls -la "$OUT/fig" | grep -i flow
+    return 0
+  fi
+  warn "没有稠密光流图（rosbag play rc=$rc）"
+  return 1
 }
 
 # =============================================================================

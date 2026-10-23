@@ -86,9 +86,14 @@ jobs:
       #
       # key 里挂 CMakeLists 的 hash：改了 nonfree 开关 / 模块列表就自动重建。
       # restore-keys 允许「换 key 但恢复到最近的旧缓存」。
+      #
+      # 注意用 `actions/cache/restore` 而不是 `actions/cache`：后者自带一个
+      # `post-if: success()` 的保存钩子，**job 一失败就什么都不存** —— OpenCV
+      # 编了 25 分钟，只要后面某个描述子崩了，这 25 分钟就白烧。所以拆成
+      # restore（这里）+ save（主流程之后、`if: always()`）两步。
       - name: 恢复 OpenCV 依赖缓存
         id: deps-cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ws_deps/install
           key: deps-melodic-nonfree-v1-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
@@ -142,6 +147,16 @@ jobs:
           sudo chown -R "$(id -u):$(id -g)" out ws_deps 2>/dev/null || true
           echo "lab5_ci.sh 退出码 = $rc"
           exit $rc
+
+      # 无论主流程成没成功，只要这次是「自己编出来的」就把 OpenCV 存下来。
+      # 首次跑挂在 SIFT 之外的地方（比如 SURF 的 nonfree、cv_bridge）时，
+      # 下一趟就能直接命中缓存，不用再烧 25 分钟。
+      - name: 保存 OpenCV 依赖缓存
+        if: always() && steps.deps-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ws_deps/install
+          key: deps-melodic-nonfree-v1-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
 
       - name: 上传产物
         if: always()

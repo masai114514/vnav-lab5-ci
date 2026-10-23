@@ -14,11 +14,12 @@
 //   topic 默认 /tesse/left_cam/rgb/image_raw（与官方 launch 的 remap 对齐）
 //   fps   默认用视频自带帧率
 //
-// 时间戳从 0 开始（rosbag play --clock 需要 /clock 单调），同时写入 /clock，
+// 时间戳从 1 s 起（rosbag 拒绝 < ros::TIME_MIN 的消息），同时写入 /clock，
 // 这样 `roslaunch ... --clock` 的 use_sim_time 链路才成立。
 
 #include <cstdio>
 #include <cstdlib>
+#include <exception>
 #include <string>
 
 #include <opencv2/core.hpp>
@@ -63,6 +64,13 @@ int main(int argc, char** argv) {
   int width = 0, height = 0;
   const double period = 1.0 / fps;
 
+  // rosbag::Bag::write 拒绝 time < ros::TIME_MIN（即 (1,0)，1 纳秒）的消息。
+  // 原来从 0 起算，第一帧就抛 "Tried to insert a message with time less than
+  // ros::TIME_MIN"，然后因为异常没走到 bag.close()，留下一个 unindexed 的坏包。
+  // 起点挪到 1 s：既满足 TIME_MIN，又给 rosbag play 留出前导时间。
+  const ros::Time t0(1, 0);
+
+  try {
   while (cap.read(frame)) {
     if (frame.empty()) {
       break;
@@ -73,7 +81,7 @@ int main(int argc, char** argv) {
     width = frame.cols;
     height = frame.rows;
 
-    const ros::Time stamp(count * period);
+    const ros::Time stamp = t0 + ros::Duration(count * period);
 
     sensor_msgs::Image img;
     img.header.stamp = stamp;
@@ -97,6 +105,17 @@ int main(int argc, char** argv) {
     ++count;
   }
   bag.close();
+  } catch (const std::exception &e) {
+    // 出了异常也必须 close()，否则 rosbag 不写索引，产物是个 unindexed 的坏包，
+    // 下游 `rosbag play` 直接拒绝打开。
+    std::fprintf(stderr, "[mp4_to_bag] 写 bag 时出错：%s（已写 %d 帧）\n",
+                 e.what(), count);
+    try {
+      bag.close();
+    } catch (...) {
+    }
+    return 1;
+  }
 
   std::printf("[mp4_to_bag] %s -> %s\n", video_path.c_str(), bag_path.c_str());
   std::printf("             %d 帧 %dx%d @ %.2f fps, 时长 %.2f s\n",
