@@ -1,0 +1,152 @@
+name: lab5-ci
+
+# =============================================================================
+# MIT 16.485 VNAV Lab 5 —— 特征检测/描述/匹配 + Harris-LK，全程无头跑一遍
+#
+# 为什么用 CI 而不是本机：lab5 需要 ROS1(melodic) + OpenCV 3.4.2(含 nonfree 的
+# SIFT/SURF)，而且 SIFT/SURF 只有在 OPENCV_ENABLE_NONFREE=ON 的源码编译里才存在
+# （pip 轮子一律排除）。本机 macOS 装不了，Windows 队友装 WSL2 也要 40 分钟起。
+# 所以搬到这里：runner 是原生 x86_64，容器给原版 bionic + ROS melodic，
+# 一次编译 ≈20 分钟，之后靠缓存只需 6~10 分钟。和 lab3/lab4 是同一套做法。
+#
+# 触发方式：
+#   - 手动（Actions 页面 → Run workflow）
+#   - push / PR 到 main（改 md 不触发，见 paths）
+#
+# 产物：artifact `lab5-results`，含 out/report.md + out/fig/*.png + 全部日志
+# =============================================================================
+on:
+  workflow_dispatch:
+    inputs:
+      pair_descriptors:
+        description: '图像对要跑的描述子（空格分隔）'
+        required: false
+        default: 'SIFT SURF ORB FAST'
+      video_descriptors:
+        description: '视频序列要跑的描述子（空格分隔）'
+        required: false
+        default: 'LK SIFT ORB'
+  push:
+    # 所有分支都触发：队友在自己的 feat/* 分支上推代码，就能立刻看到自己那部分的
+    # 数字和图，不用等 A 合并。公开仓的 Actions 分钟数不计数，跑得起。
+    # 同一分支的重复推送由下面的 concurrency 取消上一趟。
+    branches: ['**']
+    paths:
+      - 'bundle/**'
+      - 'ci/**'
+      - '.github/workflows/lab5-ci.yml'
+      - 'data/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'bundle/**'
+      - 'ci/**'
+      - 'data/**'
+
+permissions:
+  contents: read
+
+# 同一分支连续推两次时，取消上一趟 —— OpenCV 那步耗不起重复编译
+concurrency:
+  group: lab5-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lab5:
+    name: 编译 + 跑 lab5（melodic 容器）
+    runs-on: ubuntu-22.04
+    # 首次（无缓存）OpenCV 3.4.2 编译 + 全部测试 ≈ 45 分钟，留足余量
+    timeout-minutes: 75
+
+    # 容器 job：原版 bionic + ROS melodic，避免在 22.04 上折腾 RoboStack。
+    # --user root : apt 需要（runner 的默认 user 不在容器的 sudoers 里）
+    container:
+      image: ros:melodic-ros-base
+      options: --user root
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 缓存的是「依赖工作区的 install 空间」：OpenCV 3.4.2 + contrib(全模块裁剪版)
+      # + glog/gflags/catkin_simple。命中时 lab5_ci.sh 的 build_deps 整段跳过。
+      #
+      # key 里挂 CMakeLists 的 hash：改了 nonfree 开关 / 模块列表就自动重建。
+      # restore-keys 允许「换 key 但恢复到最近的旧缓存」——配合脚本里
+      # install/setup.bash 的存在性判断，能省一次全量编译。
+      - name: 恢复 OpenCV 依赖缓存
+        id: deps-cache
+        uses: actions/cache@v4
+        with:
+          path: ws_deps/install
+          key: deps-melodic-nonfree-v1-${{ hashFiles('bundle/dependencies/opencv3_catkin/CMakeLists.txt') }}
+          restore-keys: |
+            deps-melodic-nonfree-v1-
+
+      # 注意：容器 job 的默认 shell 是 sh(dash)，`set -o pipefail` 会直接报
+      # `set: Illegal option -o pipefail`。凡是 run: 都显式 shell: bash。
+      - name: 环境信息
+        shell: bash
+        run: |
+          echo "vCPU = $(nproc)"
+          free -m | awk '/Mem:/{printf "内存 = %s MB\n", $2}'
+          echo "PWD  = $PWD"
+          echo "缓存 = ${{ steps.deps-cache.outputs.cache-hit }}"
+
+      - name: 主流程（编译 + 图像对 + 视频 + 光流 + 汇总）
+        shell: bash
+        env:
+          PAIR_DESCRIPTORS: ${{ inputs.pair_descriptors || 'SIFT SURF ORB FAST' }}
+          VIDEO_DESCRIPTORS: ${{ inputs.video_descriptors || 'LK SIFT ORB' }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          # 没有这行，脚本失败也会显示 success、留下空产物（lab3 踩过）
+          set -o pipefail
+          mkdir -p out
+          bash ci/lab5_ci.sh
+          rc=$?
+          echo "lab5_ci.sh 退出码 = $rc"
+          exit $rc
+
+      - name: 上传产物
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab5-results
+          # 只传「有意义的结果」。**不要**写成 `path: out/` 或带上 ws_*/：
+          # 那里面躺着 OpenCV 的 install(几百 MB) 和 20 MB 的测试 bag，
+          # 下载慢到被杀、还白占配额。结果类文件总共只有几 MB。
+          path: |
+            out/report.md
+            out/*.log
+            out/*.txt
+            out/fig/**
+          retention-days: 14
+          if-no-files-found: warn
+
+      - name: 结论摘要
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## LAB5 运行摘要"
+            echo
+            echo "- 依赖缓存命中：\`${{ steps.deps-cache.outputs.cache-hit }}\`"
+            echo "- vCPU：\`$(nproc)\`"
+            echo
+            if [ -f out/report.md ]; then
+              # 报告前 120 行足够覆盖两张表 + 图清单
+              sed -n '1,120p' out/report.md
+            else
+              echo "_没有 out/report.md_"
+            fi
+            echo
+            echo "### 产物清单"
+            echo '```'
+            ls -la out/ 2>/dev/null || true
+            echo
+            ls -la out/fig/ 2>/dev/null | head -30 || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
